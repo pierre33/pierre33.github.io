@@ -5,5 +5,6 @@ description: Personal blog of Pierre Lassalle, image processing algorithms, Big 
 baseurl:
 url: "http://pierre33.github.io/" # the base hostname & protocol for your site
 github_username:  pierre33
+permalink: /:title.html
 # Build settings
 markdown: kramdown
