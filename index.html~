@@ -2,8 +2,25 @@
 layout: default
 ---
 
-<h1>Publications & International Conferences</h1>
-
-<p class="lead">
-	Some contents will be available soon !
-</p>
+<div class="container">
+	<div class="starter-template">
+		<h1>Pierre Lassalle</h1>
+		<table>
+			<tr>
+				<td class= "td-profil">
+					<img src="images/profil.jpg"/>
+				</td>
+				<td>
+					<p class = "lead">
+						I am currently preparing a Ph.D. at the Centre National d'Études
+						Spatiales (French Space Agency) in Toulouse in France where
+						I am performing research on the processing of large remote sensing
+						images. My research focuses mainly on the scalability of
+						segmentation and classification algorithms for large multitemporal
+						series of high resolution images.
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
