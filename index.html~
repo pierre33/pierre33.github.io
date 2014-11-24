@@ -8,7 +8,7 @@ layout: default
 		<table>
 			<tr>
 				<td class= "td-profil">
-					<img src="images/profil.jpg"/>
+					<img src="img/profil.jpg"/>
 				</td>
 				<td>
 					<p class = "lead">
