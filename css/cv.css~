@@ -1,0 +1,21 @@
+.main-theme
+{
+	list-style: none;
+	margin: 4% 0 0 0;
+}
+
+.second-theme
+{
+	margin: 2% 0 0 0;
+}
+
+.third-theme
+{
+	margin: 1% 0 0 0;
+}
+
+.prog
+{
+	padding: 2%;
+	width: 90px;
+}

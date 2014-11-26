@@ -1,26 +1,37 @@
 ---
 layout: default
 ---
-
-<div class="container">
-	<div class="starter-template">
-		<h1>Pierre Lassalle</h1>
-		<table>
-			<tr>
-				<td class= "td-profil">
-					<img src="img/profil.jpg"/>
-				</td>
-				<td>
-					<p class = "lead">
-						I am currently preparing a Ph.D. at the Centre National d'Études
-						Spatiales (French Space Agency) in Toulouse in France where
-						I am performing research on the processing of large remote sensing
-						images. My research focuses mainly on the scalability of
-						segmentation and classification algorithms for large multitemporal
-						series of high resolution images.
-					</p>
-				</td>
-			</tr>
-		</table>
-	</div>
+<div class="presentation">
+	<h1>Pierre Lassalle</h1>
+	<table>
+		<tr>
+			<td class= "td-profil">
+				<img src="img/profil.jpg"/>
+			</td>
+			<td>
+				<p>
+				I am currently preparing a Ph.D. at the Centre National d'Études
+				Spatiales (French Space Agency) in Toulouse in France where
+				I am performing research on the processing of large remote sensing
+				images. My research focuses mainly on the scalability of
+				segmentation and classification algorithms for large multitemporal
+				series of high resolution images.
+				<br />
+				The goal of this site is to share my research on large scale remote
+				sensing algorithms and introduce to you some of the libraries I have been developing
+				so far. These libraries are in progress and the presence of some terrible bugs are possible. That is why if you have a question or if you find one of these bugs, please feel free to contact me.
+				</p>
+			</td>
+		</tr>
+	</table>
 </div>
+<br />
+<br />
+<br />
+<p class="lead" style="text-align: center;font-style: italic;">
+<q>
+Anybody who comes to you and says he has a perfect language is either naïve or a salesman.
+</q>
+<br/>
+Bjarne Stroustrup, 2014
+</p>

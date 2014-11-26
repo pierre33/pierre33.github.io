@@ -1,14 +1,155 @@
 ---
 layout: default
 ---
-
-<h1>Pierre Lassalle</h1>
-
-<p class="lead">
-	I am currently with the Centre National d'Études
-	Spatiales (French Space Agency) preparing a Ph.D. where
-	I am performing research on the processing of large remote sensing
-	images. My research focuses mainly on the scalability of
-	segmentation and classification algorithms for large multitemporal
-	series of high resolution images.
-</p>
+<table style="width:100%; list-style-type:none;">
+	<tr>
+		<td style="width:50%;border-right: 1px solid black;">
+			<h3>Education</h3>
+			<ul>
+				<li class="main-theme">2012 - (2015): CNES (Centre National d'Études Spatiales) - Toulouse(31), France</li>
+				<ul>
+					<li class="second-theme">Ph.D candidate</li>
+					<ul>
+						<li class="third-theme">Topic can be downloaded <a href="docs/phd_topic.pdf">here</a></li>
+						<li class="third-theme">Teaching: Orfeo Toolbox library(OTB) at the Catholic University of Rio De Janeiro in Brazil</li>
+						<li class="third-theme">Participation to the <a href="http://tolomeofp7.unipv.it/">Tolomeo project</a></li>
+					</ul>
+				</ul>
+				<li class="main-theme">2009 - 2012 : <a href="http://www.ensta-bretagne.fr">ENSTA Bretagne</a> (École Nationale Supérieure des Techniques Avancées) - Brest (29), France</li>
+				<ul>
+					<li class="second-theme">Informatic Automatic and Embedded Systems Specialization</li>
+					<li class="second-theme">2011 - 2012 : University of the Basque Country - San Sebastian, Spain</li>
+					<ul>
+						<li class="third-theme">Master Degree in Computing Science and Intelligent Systems</li>
+					</ul>
+					<li class="second-theme">Summer 2011 (8 weeks) : China University of Petroleum - Dongying City - China</li>
+					<ul>
+						<li class="third-theme">Technical internship as assistant engineer</li>
+						<li class="third-theme">Automation of a wind farm energy production</li>
+					</ul>
+				</ul>
+				<li class="main-theme">2007 - 2009 : Lycée Michel Montaigne - Bordeaux(33), France</li>
+				<ul>
+					<li class="second-theme">Preparatory class for <q>grandes écoles</q></li>
+					<ul>
+						<li class="third-theme">Mathematics & Physics</li>
+					</ul>
+				</ul>
+			</ul>
+			<h3>Programming skills</h3>
+			<table>
+				<tr>
+					<td class="prog">C++: </td>
+					<td> 
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+					</td>
+				</tr>
+				<tr>
+				<td class="prog">Java: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+				<tr>
+				<td class="prog">Python: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+				<tr>
+				<td class="prog">PHP: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+				<tr>
+				<td class="prog">Javascript: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+			</table>
+			<h3>Languages</h3>
+			<table>
+				<tr>
+					<td class="prog">French: </td>
+					<td> 
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+						<img height="15px" src="img/star.jpg"/>
+					</td>
+				</tr>
+				<tr>
+				<td class="prog">English: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+				<tr>
+				<td class="prog">Spanish: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+				<tr>
+				<td class="prog">Portuguese: </td>
+				<td> 
+					<img height="15px" src="img/star.jpg"/>
+					<img height="15px" src="img/star.jpg"/>
+				</td>
+				</tr>
+			</table>
+		</td>
+		<td style="padding-left:2%">
+			<h3>Publications</h3>
+			<ul>
+				<li class="main-theme">A scalable tile-based framework for image segmentation of very large images and its application to region merging segmentation, by P. Lassalle, J. Inglada, J. Michel, M. Grizonnet and J. Malik.</li>
+				<ul>
+					<li class="second-theme">IEEE Transactions on Geoscience and Remote Sensing Journal</li>
+					<ul>
+						<li class="third-theme">under review</li>
+					</ul>
+				</ul>
+			</ul>
+			<h3>International Conferences</h3>
+			<ul>
+				<li class="main-theme">Large scale region-merging segmentation using the local mutual best fitting concept</a>, by P. Lassalle, J. Inglada, J. Michel, M. Grizonnet and J. Malik.</li>
+				<ul>
+					<li class="second-theme">2014 IEEE International Geoscience and Remote Sensing Symposium</li>
+					<ul>
+						<li class="third-theme">presented & published, available <a href="http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=6947590&url=http%3A%2F%2Fieeexplore.ieee.org%2Fstamp%2Fstamp.jsp%3Ftp%3D%26arnumber%3D6947590">here</a></li>
+					</ul>
+				</ul>
+			</ul>
+			<h3>Awards & Communications</h3>
+			<ul>
+				<li class="main-theme">Award-winning presentation during the JC2 (Journées CNES Jeunes Chercheurs) at the Space city in Toulouse(31), France</li>
+				<li class="main-theme">Presentation during the Pléiades days 2014</li>
+				<ul>
+					<li class="second-theme">Poster available <a href="http://espace-ftp.cborg.info/pleiades_days/presentations2014/MP2_Lassalle.pdf">here</a></li>
+				</ul>
+			</ul>
+		</td>
+	</tr>
+</table>
