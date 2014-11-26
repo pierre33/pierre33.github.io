@@ -1,14 +1,15 @@
 ---
 layout: default
 ---
+<h1>Home</h1>
 <div class="presentation">
-	<h1>Pierre Lassalle</h1>
 	<table>
 		<tr>
 			<td class= "td-profil">
 				<img src="img/profil.jpg"/>
 			</td>
 			<td>
+				<h3>Pierre Lassalle</h3>
 				<p>
 				I am currently preparing a Ph.D. at the Centre National d'Études
 				Spatiales (French Space Agency) in Toulouse in France where
@@ -33,5 +34,5 @@ layout: default
 Anybody who comes to you and says he has a perfect language is either naïve or a salesman.
 </q>
 <br/>
-Bjarne Stroustrup, 2014
+Bjarne Stroustrup, The C++ Programming Language.
 </p>
