@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<h1>Home</h1>
+<h1 style="text-align:center;">Home</h1>
 <div class="presentation">
 	<table>
 		<tr>
@@ -27,7 +27,7 @@ layout: default
 <br />
 <p class="lead" style="text-align: center;font-style: italic;">
 <q>
-Anybody who comes to you and says he has a perfect language is either naïve or a salesman.
+Anybody who comes to you and says he has a perfect language is either naive or a salesman.
 </q>
 <br/>
 Bjarne Stroustrup, The C++ Programming Language.
