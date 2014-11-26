@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<h1>Contact & Social Networks</h1>
+<br/>
+<br/>
+<div style="width:50%;margin:auto;">
+<h4>LinkedIn</h4>
+<ul>
+	<li class ="main-theme"><a href=""><img height="30" src="img/linkedin.jpg"/></a></li>
+</ul>
+<br/>
+<h4>Email address</h4>
+<ul>
+	<li class ="main-theme">lassallep@cesbio.cnes.fr</li>
+</ul>
+<br/>
+<h4>Mailing address</h4>
+<ul>
+	<li class ="main-theme">
+	Pierre Lassalle
+	<br/>
+	Bureau 007
+	<br/>
+	18 avenue, Edouard Belin,
+	<br/>
+	bpi 2801,
+	<br/>
+	31401 Toulouse cedex 9
+	</li>
+</ul>
+</div>
