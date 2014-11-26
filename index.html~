@@ -17,10 +17,6 @@ layout: default
 				images. My research focuses mainly on the scalability of
 				segmentation and classification algorithms for large multitemporal
 				series of high resolution images.
-				<br />
-				The goal of this site is to share my research on large scale remote
-				sensing algorithms and introduce to you some of the libraries I have been developing
-				so far. These libraries are in progress and the presence of some terrible bugs are possible. That is why if you have a question or if you find one of these bugs, please feel free to contact me.
 				</p>
 			</td>
 		</tr>
