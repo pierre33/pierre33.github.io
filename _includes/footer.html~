@@ -1,7 +1,13 @@
+		</div>
 	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<div class="footerholder">
+		<div class= "footer-copyright">
+			<p class="author">Pierre Lassalle</p>
+		<div>
+		<div class="footer-img">
+		</div>
+	<div>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	</body>
 
 </html>

@@ -1,15 +1,104 @@
-body {
-  padding-top: 50px;
+body
+{
+font-family: 'Open Sans', sans-serif;
+background-color: #dbedfd;
 }
-.starter-template {
-  padding: 40px 15px;
+header
+{
+	width: 1050px;
+	height: 200px;
+	margin:auto;
+}
+#container
+{
+	width: 1050px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+header
+{
+	background: url(../img/header.png);
+}
+.push
+{
+	height:100px;
+}
+.footerholder
+{
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+	margin-top: 20px;
+}
+.footer-copyright
+{
+	width:1050px;
+	margin:auto;
 }
 
-a{
+.author
+{
+	width: 150px;
+	margin:auto;
+	background-color: #618739;
+}
+
+.footer-img
+{
+	background: url(../img/footer.png);
+	width: 1050px;
+	height: 50px;
+	margin:auto;
+}
+nav
+{
+	float: left;
+	width: 180px;
+}
+
+.menu
+{
+	border: 1px solid #424308;
+}
+
+.profil
+{
+	width: 150px;
+	margin:auto;
+}
+
+li
+{
+	list-style:none;
+}
+a
+{
 	text-decoration: none;
+	color: black;
 }
 
+a:hover
+{
+	color:#424308;
+}
+
+.content
+{
+	margin:auto;
+	margin-left: 200px;
+}
 .td-profil
 {
-	width: 180px;
+	width: 160px;
+}
+.leading
+{
+	letter-spacing: 1px;
+}
+
+.prog
+{
+	width: 150px;
 }
