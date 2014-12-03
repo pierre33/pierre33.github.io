@@ -1,33 +1,26 @@
 ---
 layout: default
 ---
+<h2 class="section-cv">Send me a message</h2>
+<p>
+	<table class="international">
+		<tr>
+			<td>If you want to contact me for a job position,</td>
+		</tr>
+		<tr>
+			<td>or if you have a question about some of my libraries,</td>
+		</tr>
+		<tr>
+			<td>or just simply say me hello,</td>
+		</tr>
+		<tr>
+			<td>feel free to send me a message at this email address:
+			<ul>
+				<li>lassallepierre34@gmail.com</li>
+				<li>or</li>
+				<li>lassallep@cesbio.cnes.fr</li>
+			</ul>
+		</tr>
+	</table>
+</p>
 
-<h1>Contact & Social Networks</h1>
-<br/>
-<br/>
-<div style="width:50%;margin:auto;">
-<h4>LinkedIn</h4>
-<ul>
-	<li class ="main-theme"><a href=""><img height="30" src="img/linkedin.jpg"/></a></li>
-</ul>
-<br/>
-<h4>Email address</h4>
-<ul>
-	<li class ="main-theme">lassallep@cesbio.cnes.fr</li>
-</ul>
-<br/>
-<h4>Mailing address</h4>
-<ul>
-	<li class ="main-theme">
-	Pierre Lassalle
-	<br/>
-	Bureau 007
-	<br/>
-	18 avenue, Edouard Belin,
-	<br/>
-	bpi 2801,
-	<br/>
-	31401 Toulouse cedex 9
-	</li>
-</ul>
-</div>
