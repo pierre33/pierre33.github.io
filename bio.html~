@@ -1,8 +1,123 @@
 ---
 layout: default
 ---
-<h3>Education</h3>
-<ul class="ul-bio">
+<h2 class="section-cv">Personal Information</h2>
+<table class="civil">
+	<tr class="tr-civil">
+		<td>First name / Surname: </td>
+		<td>LASSALLE Pierre</td>
+	</tr>
+	<tr class="tr-civil">
+		<td>Location: </td>
+		<td>Living in Toulouse (31), France</td>
+	</tr>
+	<tr class="tr-civil">
+		<td>Tel. : </td>
+		<td> +33 7 52 62 10 02</td>
+	</tr>
+	<tr class="tr-civil">
+		<td>Nationality: </td>
+		<td>French</td>
+	</tr>
+	<tr class="tr-civil">
+		<td>Date of birth: </td>
+		<td>30 December 1989</td>
+	</tr>
+</table>
+<!---------------------------------------------------------------------------------->
+<h2 class="section-cv">Education</h2>
+<table class="education">
+	<tr class="tr-education">
+		<td class="td-education-left">Since 2012 (until 2015): </td>
+		<td class="td-education-right">
+			<a href="http://www.cnes.fr">CNES</a>
+			<i>Toulouse (31), France</i>.
+			<ul>
+				<li><span class="bold">Ph.D candidate</span></li> 
+				<li>Investigation to scale classical remote sensing algorithms to
+					process large amounts of data.<br/> 
+					Topic can be downloaded 
+						<a href="docs/phd_topic.pdf">here</a>.
+				</li> 
+			</ul>
+		</td>
+	</tr>
+	<tr class="tr-education">
+		<td class="td-education-left">2009 - 2012: </td>
+		<td class="td-education-right">
+			<a href="http://www.ensta-bretagne.fr">ENSTA Bretagne</a>, 
+			<i>Brest (29), France</i>
+			<br/>
+			(École Nationale Supérieures des Techniques Avancées de Bretagne)
+			<ul>
+				<li>
+					Informatic, Automation & Embedded Systems <span class="bold">engineering degree</span>.
+				</li> 
+			</ul>
+		</td>
+	</tr>
+	<tr class="tr-education">
+		<td class="td-education-left">2011 - 2012: </td>
+		<td class="td-education-right">
+			University of the Basque Country, <i>San Sebastian, Spain</i><br/>
+			<ul>
+				<li>
+					<span class="bold">Master Degree</span> in Computing Science and Intelligent Systems.
+				</li> 
+			</ul>
+		</td>
+	</tr>
+	<tr class="tr-education">
+		<td class="td-education-left">2007 - 2009: </td>
+		<td class="td-education-right">
+			Lycée Michel Montaigne, <i>Bordeaux (33), France</i><br/>
+			<ul>
+				<li>
+					<span class="bold">Mathematics and Physics Preparatory class</span> for <q>grandes écoles</q>.
+				</li> 
+			</ul>
+		</td>
+	</tr>
+	<tr class="tr-education">
+		<td class="td-education-left">2007 - 2009: </td>
+		<td class="td-education-right">
+			Lycée de La Sauque, <i>La Brède (33), France</i><br/>
+			<ul>
+				<li>
+					Scientific Baccalauréat with honors.
+				</li> 
+			</ul>
+		</td>
+	</tr>
+</table>
+<!---------------------------------------------------------------------------------->
+<h2 class="section-cv">International experiences</h2>
+<table class="international">
+	<tr class="tr-international">
+		<td class="td-international-left">2013 - 2014: </td>
+		<td class="td-international-right">
+			<a href="http://www.cnes.fr">Catholic University of Rio De Janeiro (PUC)</a>
+			<i>Rio De Janeiro, Brazil</i>.
+			<ul>
+				<li><a href="http://tolomeofp7.unipv.it/">Tolomeo project</a>
+					(Tools for Open Multi-risk assessment using Earth Observation data).
+				</li>
+					<ul>
+						<li class="li-international">Development of a software to allow the communication between
+							the <a href="http://www.orfeo-toolbox.org/">Orfeo Toolbox</a> library 
+							and <a href="http://www.lvc.ele.puc-rio.br/projects/interimage/">
+								InterImage</a>.
+						</li>
+						<li class="li-international">
+							Teaching of the Orfeo Toolbox library to graduate and undergraduate
+							students of the Vision Computing Laboratory of PUC.
+						</li> 
+			</ul>
+		</td>
+	</tr>
+</table>
+
+<!--<ul class="ul-bio">
 	<li class="main-theme">2012 - (2015): CNES (Centre National d'Études Spatiales) - Toulouse(31), France</li>
 	<ul>
 		<li class="second-theme">Ph.D candidate</li>
@@ -116,4 +231,4 @@ layout: default
 		<img height="15px" src="img/star.png"/>
 	</td>
 	</tr>
-</table>
+</table>-->

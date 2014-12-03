@@ -1,25 +1,30 @@
-table td, table td *
+.section-cv
+{
+	border-bottom: 3px dotted #455818;
+}
+
+.international
+{
+	letter-spacing: 1px;
+}
+
+.civil, .education, .international
+{
+	width: 100%;
+}
+
+.td-education-left, .td-education-right,
+.td-international-left, .td-international-right
 {
 	vertical-align: top;
 }
-.main-theme
+
+.td-education-left, .td-international-left
 {
-	list-style: none;
-	margin: 4% 0 0 0;
+	width: 200px;
 }
 
-.second-theme
+.li-international
 {
-	margin: 2% 0 0 0;
-}
-
-.third-theme
-{
-	margin: 1% 0 0 0;
-}
-
-.prog
-{
-	padding: 2%;
-	width: 90px;
+	list-style: disc;
 }
