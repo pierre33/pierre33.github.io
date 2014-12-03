@@ -6,9 +6,9 @@ letter-spacing: 1px;
 }
 header
 {
-	width: 1050px;
-	height: 200px;
-	margin:auto;
+	position: fixed;
+	top:0px;
+	width: 100%;
 }
 #container
 {
@@ -16,8 +16,11 @@ header
 	margin: 0 auto;
 	margin-top: 20px;
 }
-header
+.header-img
 {
+	width: 1050px;
+	height: 200px;
+	margin: 0 auto;
 	background: url(../img/header.png);
 }
 .push
@@ -41,7 +44,7 @@ header
 
 .author
 {
-	font-size: small;
+	font-size: x-small;
 	width: 200px;
 	margin:auto;
 	background-color: #618739;

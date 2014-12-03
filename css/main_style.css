@@ -6,9 +6,13 @@ letter-spacing: 1px;
 }
 header
 {
-	width: 1050px;
+	position: fixed;
+	top:0px;
+	width: 100%;
+}
+.header-push
+{
 	height: 200px;
-	margin:auto;
 }
 #container
 {
@@ -16,8 +20,11 @@ header
 	margin: 0 auto;
 	margin-top: 20px;
 }
-header
+.header-img
 {
+	width: 1050px;
+	height: 200px;
+	margin: 0 auto;
 	background: url(../img/header.png);
 }
 .push
