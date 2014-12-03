@@ -4,12 +4,12 @@ layout: default
 <h2 class="section-cv">Personal Information</h2>
 <table class="civil">
 	<tr class="tr-civil">
-		<td>First name / Surname: </td>
+		<td>Name: </td>
 		<td>Pierre LASSALLE</td>
 	</tr>
 	<tr class="tr-civil">
 		<td>Location: </td>
-		<td>Living in Toulouse (31), France</td>
+		<td>Toulouse (31), France</td>
 	</tr>
 	<tr class="tr-civil">
 		<td>Tel. : </td>
