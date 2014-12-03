@@ -6,26 +6,16 @@ letter-spacing: 1px;
 }
 header
 {
-	position: fixed;
-	top:0px;
-	width: 100%;
-}
-.header-push
-{
+	width: 1050px;
 	height: 200px;
+	margin: 0 auto;
+	background: url(../img/header.png);
 }
 #container
 {
 	width: 1050px;
 	margin: 0 auto;
 	margin-top: 20px;
-}
-.header-img
-{
-	width: 1050px;
-	height: 200px;
-	margin: 0 auto;
-	background: url(../img/header.png);
 }
 .push
 {

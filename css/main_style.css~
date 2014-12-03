@@ -4,19 +4,13 @@ font-family: 'Open Sans', sans-serif;
 letter-spacing: 1px;
 /*background-color: #dbedfd;*/
 }
-header
-{
-	position: fixed;
-	top:0px;
-	width: 100%;
-}
 #container
 {
 	width: 1050px;
 	margin: 0 auto;
 	margin-top: 20px;
 }
-.header-img
+header
 {
 	width: 1050px;
 	height: 200px;
