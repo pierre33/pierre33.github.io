@@ -5,7 +5,7 @@ layout: default
 <h2 class="section-cv">Libraries</h2>
 <table class="international">
 	<tr class="tr-international">
-		<td id="grm" class="td-international-left">GRM Library: </td>
+		<td class="td-international-left">GRM Library: </td>
 		<td class="td-international-right">
 			<p class="desc-code">
 			In the frame of my Ph.D., I decide to develop the Generic Region Merging
