@@ -1,7 +1,8 @@
 body
 {
-font-family: 'Open Sans', sans-serif;
-letter-spacing: 1px;
+	font-family: 'Open Sans', sans-serif;
+	letter-spacing: 1px;
+	overflow-x: scroll;
 /*background-color: #dbedfd;*/
 }
 header
