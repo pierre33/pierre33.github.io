@@ -4,10 +4,9 @@ layout: default
 
 <h2 class="section-cv">Pierre Lassalle</h2>
 <p class="leading">
-I am currently preparing a Ph.D. at the Centre National d'Études
-Spatiales (French Space Agency) in Toulouse in France where
-I am performing research on the processing of large remote sensing
-images. My research focuses mainly on the scalability of
+I am currently preparing a Ph.D. at the <a href="http://www.cesbio.ups-tlse.fr/">CESBIO</a> 
+laboratory in Toulouse in France where I am performing research on the processing of 
+large remote sensing images. My research focuses mainly on the scalability of
 segmentation and classification algorithms for large multitemporal
 series of high resolution images.
 </p>
