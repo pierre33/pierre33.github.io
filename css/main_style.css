@@ -2,7 +2,7 @@ body
 {
 	font-family: 'Open Sans', sans-serif;
 	letter-spacing: 1px;
-	overflow-x: scroll;
+	overflow-y: scroll;
 /*background-color: #dbedfd;*/
 }
 header
