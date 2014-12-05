@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta name="description" content="Personal blog on programming and remote sensing">
-	<meta name="keywords" content="programming, remote sensing, orfeo Toolbox, segmentation, classification, big data, scalability">
+	<meta name="keywords" content="Pierre Lassalle, region-merging, CESBIO, CNES, programming, remote sensing, orfeo Toolbox, segmentation, classification, big data, scalability">
 	<meta name="author" content="Pierre Lassalle">
 	<title>Pierre Lassalle</title>
     <!-- Bootstrap -->
