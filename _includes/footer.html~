@@ -3,10 +3,15 @@
 	<div class="push"></div>
 	<div class="footerholder">
 		<div class="footer-img">
-			<p class="author">This is Pierre Lassalle' personal website. Copyright 2014. Copy freely.</p>
+			<p class="author">This is Pierre Lassalle' personal website.<br /> Copyright 2014. Copy freely.</p>
 		</div>
 	<div>
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	</body>
+  
+<script language="javascript" type="text/javascript">
+ SyntaxHighlighter.config.bloggerMode = true;
+ SyntaxHighlighter.all();
+</script>
 
 </html>

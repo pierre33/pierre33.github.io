@@ -1,0 +1,40 @@
+body
+{
+	font-family: 'Open Sans', sans-serif;
+	letter-spacing: 1px;
+	overflow-y: scroll;
+	background-color:#d3e1c6;
+}
+
+a
+{
+	text-decoration: none;
+	color: black;
+}
+
+a:hover
+{
+	color: #424308;
+}
+
+.main-title
+{
+	border-bottom: 3px dotted #455818;
+}
+
+.second-title
+{
+	border-bottom: 2px dotted #455818;
+}
+
+.third-title
+{
+	border-bottom: 1px dotted #455818;
+}
+
+.prettyprint
+{
+	border: 2px solid;
+	border-radius: 5px;
+	background-color: #dcccb2;
+}

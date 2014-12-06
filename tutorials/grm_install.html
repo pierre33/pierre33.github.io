@@ -1,0 +1,133 @@
+---
+layout: tuto_layout
+---
+<h2 class="main-title"> Installation</h2>
+<ol>
+	<li><a href="#boost">Boost Library</a></li>
+	<li><a href="#cmake">CMake installation</a></li>
+	<li><a href="#otb">Orfeo toolbox installation</a></li>
+	<li><a href="#grm">GRM installation</a></li>
+</ol>
+In the following, we consider we are using the Ubuntu Linux distribution (Sorry
+for those who use Mac, Windows or a Linux distribution different from Debian. 
+For once, Linux is given priority.)
+<br/>
+The minimum version accepted for gcc is 4.7 (you can check it in a terminal by
+invoking the command <i>g++ --version</i>) and the minimum version for clang is 3.2
+
+<h3 id="boost" class="second-title"><a href="http://www.boost.org/">Boost library</a></h3>
+<p class="explanation">
+To install the boost libraries on Ubuntu, it is relatively easy. You can open your 
+terminal and use the command <i>apt-get</i> (do not forget to use it as root: <i>sudo</i>)
+<pre class="prettyprint">
+	<code class="bsh">
+		sudo apt-get install libboost-all-dev
+	</code>
+</pre>
+or you can call
+<pre class="prettyprint">
+	<code class="bsh">
+		sudo aptitude search boost
+	</code>
+</pre>
+and install only the boost_program_options library.
+</p>
+<!---------------------------------------------------------------------------------->
+<h3 id="cmake" class="second-title"><a href="http://www.cmake.org/">CMake</a></h3>
+<p class="explanation">
+To install the CMake software, you have two options:
+<ul>
+	<li> You want to use cmake in command line and put your arguments manually.</li>
+	<li> You want a nice GUI</li> 
+</ul>
+For the first option, execute the following command
+<pre class="prettyprint">
+	<code class="bsh">
+		sudo apt-get install cmake
+	</code>
+</pre>
+For the second
+<pre class="prettyprint">
+	<code class="bsh">
+		sudo apt-get install cmake cmake-curses-gui
+	</code>
+</pre>
+</p>
+<h3 id="cmake" class="second-title"><a href="http://www.orfeo-toolbox.org/">Orfeo Toolbox (otb)</a></h3>
+<p class="explanation">
+For Ubuntu 12.04 and higher, OTB development libraries are available as Debian
+packages through APT repositories. Since release 3.14.1, they are available in the
+ubuntugis-unstable repository.
+<br/>
+You can add it by using this command lines:
+<pre class="prettyprint">
+	<code class="bsh">
+		sudo aptitude install add-apt-repository  
+		sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+		sudo apt-get update 
+	</code>
+</pre>
+After you can run:
+<pre class="prettyprint">
+	<code class="bsh">
+		sudo apt-get install libotb-dev
+	</code>
+</pre>
+Other useful OTB packages are available. For more information click 
+<a href="http://www.orfeo-toolbox.org/CookBook/CookBooksu3.html#x11-100001.2.3">here</a>,
+but for our library this command is enough.
+</p>
+<!-------------------------------------------------------------------------------------------------->
+<h3 id="cmake" class="second-title">GRM installation</h3>
+<p class="explanation">
+First you have to download the source code <a href="http://tully.ups-tlse.fr/lassallep/grm/">
+here</a><br/> or if you have <a href="doc.ubuntu-fr.org/git">git</a> installed you can run:
+<pre class="prettyprint">
+	<code class="bsh">
+		git clone http://tully.ups-tlse.fr/lassallep/grm/
+	</code>
+</pre>
+Then I suggest you to go to the grm directory:
+<pre class="prettyprint">
+	<code class="bsh">
+		cd grm/
+	</code>
+</pre>
+and create a build directory:
+<pre class="prettyprint">
+	<code class="bsh">
+		mkdir grm-build | cd grm-build
+	</code>
+</pre>
+First you have to generate the Makefile with cmake:
+<pre class="prettyprint">
+	<code class="bsh">
+	cmake \
+	-DCMAKE_CXX_FLAGS:STRING=-std=c++11 \
+	-DOTB_DIR:PATH=/usr/lib/otb \
+	-DITK_DIR:PATH=/usr/lib/cmake/ITK-4.6 \
+	-DGDAL_CONFIG:FILEPATH=/usr/bin/gdal-config \
+	-DGDAL_INCLUDE_DIR:PATH=/usr/include/gdal \
+	-DGDAL_LIBRARY:FILEPATH=/usr/lib/libgdal.so \
+	../src/
+	</code>
+</pre>
+The previous commands works if you have installed the otb development libraries from
+the package as i described before (in a standard way). If you have used another way you have to give the right
+ otb directory path (where the OTBCMake.config is located) and the right gdal paths.
+<br />
+Note also that c++11 is used which explains the minimum version required for gcc or clang.
+<br />
+Once the Makefile generated just run:
+<pre class="prettyprint">
+	<code class="bsh">
+	make
+	</code>
+</pre>
+If everything is fine, you should have the GRM library in the sub-directory <i>Library/</i>
+and the applications into <i>Applications/</i>
+<br/>
+I invite you to go to the <a href="grm_tuto.html">next tutorial</a> to learn how to use 
+the region merging algorithms.
+available.
+</p>
