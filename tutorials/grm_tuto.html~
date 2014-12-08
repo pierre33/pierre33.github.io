@@ -215,6 +215,7 @@ we obtain the resulting image with the representation of the contours of the reg
 	<td>
 		<img src="img_tuto/refspringoutput.jpg"/>
 	</td>
+</table>
 </p>
 
 <h4 id="euc" class="third-title"> Full Lambda schedule criterion </h3>
