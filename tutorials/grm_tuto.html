@@ -218,6 +218,69 @@ we obtain the resulting image with the representation of the contours of the reg
 </table>
 </p>
 
-<h4 id="euc" class="third-title"> Full Lambda schedule criterion </h3>
+<h4 id="fls" class="third-title"> Full Lambda schedule criterion </h3>
+<p>
+This criterion is based on spectral and spatial information. The spectral information
+is the euclidean distance between the spectral mean vectors and the spatial information
+is the length of the boundary between the two adjacent regions. The unique threshold is
+the lambda value that limits the growth of the regions.
+</p>
+<p>
+The source code for this example can be found in the file:<br/>
+<i>grm/src/Applications/FLSASegmentation.cxx</i>
+</p>
+<p>
+Let's look at the minimal code required to use this algorithm. First the following header
+defining the Full Lambda Schedule algorithm class must be included:
+<pre class="prettyprint">
+	<code class="cc">
+	#include "fls-algorithm.h"
+	</code>
+</pre>
+We declare the image type based on a particular pixel type and dimension. In this case the
+<i>float</i> type is used and the dimension of the image is obviously 2.
+<pre class="prettyprint">
+	<code class="cc">
+	typedef otb::VectorImage&lt;unsigned int, 2&gt; ImageType;
+	</code>
+</pre> 
+Next, we declare the Full Lambda Schedule region merging algorithm based on the image type
+we have just declared.
+<pre class="prettyprint">
+	<code class="cc">
+	typedef FLSAlgorithmRM&lt;ImageType&gt; SegmenterType;
+	</code>
+</pre> 
+We declare and construct the parameters specific to the Full Lambda Schedule criterion.
+The unique parameter is the lambda value with type <i>float</i>.
+<pre class="prettyprint">
+	<code class="cc">
+	FLSParams params = 40;
+	</code>
+</pre> 
+Then we construct our segmenter.
+<pre class="prettyprint">
+	<code class="cc">
+	SegmenterType seg_;
+	</code>
+</pre>
+We pass the common parameters described previously.
+<pre class="prettyprint">
+	<code class="cc">
+	seg_.SetInput(inputFileName);
+	seg_.SetOutputRGB(outputFileName);
+	seg_.SetOutputLabel(outputLabelFileName);
+	seg_.SetParameters(params);
+	</code>
+</pre>
+And finally we run the segmentation process.
+<pre class="prettyprint">
+	<code class="cc">
+	seg_.Run();
+	</code>
+</pre>
+Using the test image provided with the grm library in the directory <i>img/</i>, 
+we obtain the resulting image with the representation of the contours of the regions
+</p>
 <h4 id="euc" class="third-title"> Baatz & Schäpe criterion </h3>
 
