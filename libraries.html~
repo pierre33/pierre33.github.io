@@ -18,7 +18,7 @@ layout: default
 			</p>
 			<ul>
 				<li class="link-code"><a href="http://tully.ups-tlse.fr/lassallep/grm/">GitHub</a></li>
-				<li class="link-code"><a href="#">Manual</a></li>
+				<li class="link-code"><a href="tuto.html#grm">Manual</a></li>
 				<li class="link-code"><a href="#">Technical Report</a></li>
 			</ul>
 		</td>

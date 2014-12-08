@@ -3,7 +3,6 @@ layout: tuto_layout
 ---
 <h2 class="main-title"> Installation</h2>
 <ol>
-	<li><a href="#boost">Boost Library</a></li>
 	<li><a href="#cmake">CMake installation</a></li>
 	<li><a href="#otb">Orfeo toolbox installation</a></li>
 	<li><a href="#grm">GRM installation</a></li>
@@ -14,24 +13,6 @@ For once, Linux is given priority.)
 <br/>
 The minimum version accepted for gcc is 4.7 (you can check it in a terminal by
 invoking the command <i>g++ --version</i>) and the minimum version for clang is 3.2
-
-<h3 id="boost" class="second-title"><a href="http://www.boost.org/">Boost library</a></h3>
-<p class="explanation">
-To install the boost libraries on Ubuntu, it is relatively easy. You can open your 
-terminal and use the command <i>apt-get</i> (do not forget to use it as root: <i>sudo</i>)
-<pre class="prettyprint">
-	<code class="bsh">
-		sudo apt-get install libboost-all-dev
-	</code>
-</pre>
-or you can call
-<pre class="prettyprint">
-	<code class="bsh">
-		sudo aptitude search boost
-	</code>
-</pre>
-and install only the boost_program_options library.
-</p>
 <!---------------------------------------------------------------------------------->
 <h3 id="cmake" class="second-title"><a href="http://www.cmake.org/">CMake</a></h3>
 <p class="explanation">

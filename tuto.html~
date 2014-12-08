@@ -3,7 +3,7 @@ layout: default
 ---
 
 <h2 class="section-cv">Tutorials</h2>
-<h2 class="section-cv">GRM Library</h2>
+<h3>GRM Library</h3>
 <ul>
 	<li><a href="tutorials/grm_install.html">GRM Library Installation</a></li>
 	<li><a href="tutorials/grm_tuto.html">GRM Library Tutorial</a></li>

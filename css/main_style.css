@@ -3,6 +3,7 @@ body
 	font-family: 'Open Sans', sans-serif;
 	letter-spacing: 1px;
 	overflow-y: scroll;
+	text-align: justify;
 /*background-color: #dbedfd;*/
 }
 header

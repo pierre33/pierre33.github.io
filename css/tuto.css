@@ -4,6 +4,7 @@ body
 	letter-spacing: 1px;
 	overflow-y: scroll;
 	background-color:#d3e1c6;
+	text-align: justify;
 }
 
 a

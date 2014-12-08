@@ -29,7 +29,7 @@ a:hover
 
 .third-title
 {
-	border-bottom: 2px dotted #455818;
+	border-bottom: 1px dotted #455818;
 }
 
 .prettyprint
