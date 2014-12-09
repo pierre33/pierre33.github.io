@@ -17,7 +17,7 @@
 	<body>
 
 	<header>
-		<nav style="background-color:#7e9d62;text-align:center;">
+		<nav style="background-color:#7e9d62;">
 			<ul class="menu">
 				<li><a class="nav-link" href="../tuto.html">Go back to Tutorials menu</a></li>
 			</ul>
