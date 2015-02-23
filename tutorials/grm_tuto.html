@@ -156,7 +156,7 @@ defining the Baatz algorithm class must be included:
 	#include "lsrmBaatzSegmenter.h"
 	</code>
 </pre>
-Then, the headers to handle and to read an otb vector image have to included:
+Then, the headers to handle an otb vector image have to included:
 <pre class="prettyprint">
 	<code class="cc">
 	#include &lt;otbImageFileReader.h&gt;
@@ -194,7 +194,7 @@ Then we construct our segmenter.
 We pass the common parameters described previously.
 <pre class="prettyprint">
 	<code class="cc">
-    segmenter.SetParam(params);
+	segmenter.SetParam(params);
 	segmenter.SetThreshold(scale);
 	segmenter.SetInputFileName(input_image);
 	segmenter.SetClusteredImageFileName(clustered_image);
