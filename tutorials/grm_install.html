@@ -10,9 +10,6 @@ layout: tuto_layout
 In the following, we consider we are using the Ubuntu Linux distribution (Sorry
 for those who use Mac, Windows or a Linux distribution different from Debian. 
 For once, Linux is given priority.)
-<br/>
-The minimum version accepted for gcc is 4.7 (you can check it in a terminal by
-invoking the command <i>g++ --version</i>) and the minimum version for clang is 3.2
 <!---------------------------------------------------------------------------------->
 <h3 id="cmake" class="second-title"><a href="http://www.cmake.org/">CMake</a></h3>
 <p class="explanation">
@@ -68,36 +65,27 @@ here</a><br/> or if you have <a href="doc.ubuntu-fr.org/git">git</a> installed y
 		git clone http://tully.ups-tlse.fr/lassallep/grm/
 	</code>
 </pre>
-Then I suggest you to go to the grm directory:
+Then I suggest to create a directory where you will build the grm:
 <pre class="prettyprint">
 	<code class="bsh">
-		cd grm/
+		mkdir grm_bin
 	</code>
 </pre>
-and create a build directory:
+and go to this directory:
 <pre class="prettyprint">
 	<code class="bsh">
-		mkdir grm-build | cd grm-build
+ 		cd grm_bin
 	</code>
 </pre>
 First you have to generate the Makefile with cmake:
 <pre class="prettyprint">
 	<code class="bsh">
-	cmake \
-	-DCMAKE_CXX_FLAGS:STRING=-std=c++11 \
-	-DOTB_DIR:PATH=/usr/lib/otb \
-	-DITK_DIR:PATH=/usr/lib/cmake/ITK-4.6 \
-	-DGDAL_CONFIG:FILEPATH=/usr/bin/gdal-config \
-	-DGDAL_INCLUDE_DIR:PATH=/usr/include/gdal \
-	-DGDAL_LIBRARY:FILEPATH=/usr/lib/libgdal.so \
-	../src/
+	ccmake PATH_TO_GRM_SOURCE_DIRECTORY/
 	</code>
 </pre>
-The previous commands works if you have installed the otb development libraries from
-the package as i described before (in a standard way). If you have used another way you have to give the right
- otb directory path (where the OTBCMake.config is located) and the right gdal paths.
-<br />
-Note also that c++11 is used which explains the minimum version required for gcc or clang.
+The previous commands works automatically if you have installed the otb development libraries from
+the package as I described before (in a standard way). If you have compiled from the source then you have to give the right
+ otb directory path (where the OTBCMake.config is located).
 <br />
 Once the Makefile generated just run:
 <pre class="prettyprint">
@@ -105,9 +93,9 @@ Once the Makefile generated just run:
 	make
 	</code>
 </pre>
-If everything is fine, you should have the GRM library in the sub-directory <i>Library/</i>
-and the applications into <i>Applications/</i>
+If everything is fine, you should have the GRM library in the sub-directory <i>Code/</i>
+and the executable file into <i>Applications/</i>
 <br/>
-I invite you to go to the <a href="grm_tuto.html">next tutorial</a> to learn how to use 
-the region merging algorithms.
+I invite you to go to the <a href="grm_tuto.html">next tutorial</a> to learn how to
+segment an image.
 </p>
