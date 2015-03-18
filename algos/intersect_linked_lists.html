@@ -64,4 +64,25 @@ and test if they are equal:
 	  }
 	</code>
 </pre>
+This solution is O(1) memory complexity but the time complexity in the worst and average case is O(n*m) if n is the
+size of the first list and m the size of the second list. The proposed solution does not fit the requirement so we will
+need to optimize it.
+</p>
+<h3 id="cmake" class="second-title">Second reasonning</h3>
+<p>
+I repeat here what is important is not to code the solution but how we find the solution.
+The requirement is that the time complexity has to be in linear time and the memory complexity has to be constant.
+<br/>
+So the solution is more or less similar to an algorithm that finds the intersection in one scan of the nodes of one
+of the list.
+<br/> 
+The first idea that comes into mind is to start with two pointers targeting the first nodes of both lists and
+then comparing side-by-side the nodes scanning in parallel both lists. You will tell me that is not so clever
+because if the lists have different size (and it is the general case) it will not work. I completely agree but
+guess what it is the starting point of the good solution !
+<br/>
+Indeed, if I find the starting nodes for both lists where I am sure that the number of the remaining nodes to scan
+is the same then I can do the solution I just described before. The following figure will help you to understand.
+<img  style="display:block; margin:0 auto; height:300px;"
+			src="img_algos/linkedLists2.png"/>
 </p>
