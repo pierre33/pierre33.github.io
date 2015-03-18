@@ -37,4 +37,31 @@ complexity of O(1).
 If there is no intersection between both lists, the function must return NULL.
 <br />
 Finally we assume that there are no cycles in both lists.
+<br/>
+Before delving into the reasonning, I invite you to try to solve this solution and to come back after while ;)
+</p>
+<h3 id="cmake" class="second-title">First reasonning</h3>
+<p>
+Let see the first solution that comes into mind without taking care about the requirements.
+An easy solution would be for each node of a list to explore all the nodes of the other list
+and test if they are equal:
+<pre class="prettyprint">
+	<code class="cc">
+	  ListNode* getIntersectionNode(ListNode *headA, ListNode *headB)
+	  {
+	      if(headA == NULL || headB == NULL)
+	          return NULL;
+
+	      for(ListNode * tempA = headA; tempA != NULL; tempA = tempA->next)
+	      {
+	          for(ListNode * tempB = headB; tempB != NULL; tempB = tempB->next)
+              {
+	              if(tempA == tempB)
+                     return tempA;
+              }
+	      }
+          return NULL;
+	  }
+	</code>
+</pre>
 </p>
