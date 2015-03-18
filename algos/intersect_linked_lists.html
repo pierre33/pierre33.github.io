@@ -23,7 +23,7 @@ linked lists.
 <img  style="display:block; margin:0 auto; height:250px;"
 			src="img_algos/linkedLists1.png"/>
 <p>
-Indeed, in this figure, both lists share the same nodes from c1 to c3.
+Indeed, both lists share the same nodes from c1 to c3.
 <br/>
 Given the following prototype of the function:
 <pre class="prettyprint">
@@ -65,7 +65,7 @@ and test if they are equal:
 	</code>
 </pre>
 This solution is O(1) memory complexity but the time complexity in the worst and average case is O(n*m) if n is the
-size of the first list and m the size of the second list. The proposed solution does not fit the requirement so we will
+size of the first list and m the size of the second list. This proposed solution does not fulfill the requirements so we will
 need to optimize it.
 </p>
 <h3 id="cmake" class="second-title">Second reasonning</h3>
@@ -77,7 +77,7 @@ So the solution is more or less similar to an algorithm that finds the intersect
 of the list.
 <br/> 
 The first idea that comes into mind is to start with two pointers targeting the first nodes of both lists and
-then comparing side-by-side the nodes scanning in parallel both lists. You will tell me that is not so clever
+then comparing side-by-side the nodes in parallel until we reach the end of the lists. You will tell me that is not so clever
 because if the lists have different size (and it is the general case) it will not work. I completely agree but
 it is the starting point of the good solution !
 <br/>
@@ -90,7 +90,7 @@ both nodes are equal. For example in the figure above, we will first compare a2 
 c3.
 <br/>
 How to determine the starting nodes ?<br/>
-I think by looking at the figure, you guess how to do it right ? Indeed if we know the size of both lists and then compare
+I think by looking at the figure, you guess how to do it right ? Indeed, if we know the size of both lists and then compare
 these sizes we know where to start.
 <br/>
 <ul>
@@ -99,7 +99,7 @@ these sizes we know where to start.
   <li>If m > n then the starting nodes are the (m-n)<sup>th</sup> of the second list and the first node of the first list.
 </ul>
 It is time to analyse the time complexity of our solution in the worst case. Determining the size of both lists is achieved in linear time
-by simply scanning all the nodes of each list. Going to the starting nodes is achieved in linear time in the worst case (if we have to go to the last node of one list). Finally, comparing the nodes is achieved also in linear time. It seems that this solution fulfills the requirements :).
+by simply scanning all the nodes of each list. Going to the starting nodes is achieved in linear time in the worst case (if we have to go to the last node of one list). Finally, comparing the nodes is also achieved in linear time. It seems that this solution fulfills the requirements :).
 <br/>
 I am a nice guy, here is the source code:
 <pre class="prettyprint">
@@ -147,4 +147,10 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
     }
 	</code>
 </pre>
+</p>
+<h3 id="cmake" class="second-title">Conclusion</h3>
+<p>
+I really hope you had fun tackling this problem. If you find a more elegant solution (and it is great !) do not hesitate
+to send me a message with your solution. It will be a pleasure for me to add it in this page with your name, your website link
+and/or your github link.
 </p>
