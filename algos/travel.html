@@ -1,0 +1,149 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">Want to travel ?</h2>
+<h3 id="cmake" class="second-title">Problem statement</h3>
+<p>
+Imagine that someone has scheduled for you several flights but he did not write them in order. Here is an example:
+<ul>
+  <li>BES -> BOD</li>
+  <li>MRS -> NTE</li>
+  <li>LYS -> BES</li>
+  <li>ORY -> LYS</li>
+  <li>BOD -> MRS</li>
+  <li>TLS -> ORY</li>
+</ul>
+Each airport is identified by its code (BOD is for example the airport of Bordeaux). Each flight is composed of a departure airport and a destination airport. For example, for the first flight of the list, the departure airport is BES (Brest) and the destination airport is BOD (Bordeaux). 
+If you follow these flights in order, you will see that it is impossible (unless you have a fast car to quickly go to the next airport or you can go by teleportation... but wait why do you want to take the plane then ?). What we are sure is that it exists an unique order 
+where it is possible for the traveller to visit all the airports. In this example, the right order of the flights is the following:
+<ul>
+  <li>TLS -> ORY</li>
+  <li>ORY -> LYS</li>
+  <li>LYS -> BES</li>
+  <li>BES -> BOD</li>
+  <li>BOD -> MRS</li>
+  <li>MRS -> NTE</li>
+</ul>
+This order is better right ? Indeed, each time I get to a new airport, my next flight leaves from this airport and I visit
+all the airports.
+<br/>
+This is exactly the goal of our algorithm. It is true that here you can do it manually, but imagine thousands of flights...
+<br/>
+For this algorithm, the requirements are the following:
+<ul>
+  <li>The running time has to be linear O(n) where n is the number of flights</li>
+  <li>The memory complexity has also to be linear O(n)</li>
+</ul>
+As usual, before delving into the solution, I invite you to think how to do it by yourself (it is the funniest part ;)).
+</p>
+
+<h3 id="cmake" class="second-title">Reasonning step</h3>
+How to tackle this problem ?
+<br/> 
+First we are sure that there is an unique solution. What does it mean ?... (brain working)... Eureka !
+<br/>
+If there is one unique solution, it means that the departure airport of the first flight will never be
+a destination airport. By analogy the destination airport of the last flight will never be a departure
+airport.
+<br/>
+Yes but well how can this be helpful ? ... (brain working)... Ah yes ! It means that if I found the
+right departure airport of the first flight then we just have to consider its destination airport and
+go to look for the flight where this destination airport is the departure airport and so on until we get
+to the final destination airport (which means that we can not find a flight where this airport is the 
+departure airport). You follow me ?
+<br/>
+Ok, if we take the previous example. The first flight is TLS -> ORY because TLS is never a destination airport.
+Once this flight found, we go to the destination airport. In our example it is ORY. Then we look for the flight
+leaving from ORY : ORY -> LYS and so on until we get to NTE. Indeed, NTE is never a departure airport ;)
+
+<h3 id="cmake" class="second-title">Programming step</h3>
+<p>
+Ok now that we have the solution, we can think about how to program it and if possible efficiently.
+We need to determine the first departure airport by checking that it is never a destination airport. 
+So an idea would be to store in a container the destination airports and to check in constant time if an
+airport is inside or not. Which container ? ... (brain working) ... Eureka !
+<br/>
+A collection (std::unordered_set) will be perfect for that right ?
+<br/>
+Ok now we know the first departure airport, but we need to go to its destination airport and then in constant
+time retrieve the next flight leaving from this airport... Eureka again right ? I think that a hastable (std::unordered_map)
+will do the job. The keys of the map will be the departure airports and the values the destination airports.
+The algorithm stops when we will not find the key of a destination airport.
+<br/>
+Now that you have the solution, I invite you to program it but as always, because I am a nice guy I give you the
+source code. 
+<pre class="prettyprint">
+	<code class="cc">
+#include &lt;unordered_map&gt;
+#include &lt;unordered_set&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+
+using Flight = std::pair&lt;std::string, std::string&gt;;
+using Flights = std::vector&lt;Flight&gt;;
+
+Flights flights(6);
+
+void CreateRandomFlights();
+void PrintFlights(Flights& _flights);
+Flights RearrangeFlights();
+
+int main(int argc, char *argv[])
+{
+    CreateRandomFlights();
+
+	PrintFlights(flights);
+
+	auto resFlights = RearrangeFlights();
+
+	std::cout << "Arranged list of flights:" << std::endl;
+	PrintFlights(resFlights);
+	
+    return 0;
+}
+
+Flights RearrangeFlights()
+{
+	std::unordered_map<std::string, std::string> OrigDestFlightMap;
+	std::unordered_set<std::string> DestSet;
+	Flights resFlights;
+	resFlights.reserve(flights.size());
+
+	// Create the map of the flights and the destination sets
+	for(auto& f : flights)
+	{
+		OrigDestFlightMap.insert(f);
+		DestSet.insert(f.second);
+	}
+
+	// The first airport is the one which is no present in the destination airports
+	bool findOrig = false;
+	for(const auto& origDest : OrigDestFlightMap)
+	{
+		if(DestSet.find(origDest.first) == DestSet.end())
+		{
+			resFlights.push_back(origDest);
+			findOrig = true;
+			break;
+		}
+	}
+
+	
+
+	if(findOrig)
+	{
+		int i = 0;
+		auto query = OrigDestFlightMap.find(resFlights[i].second);
+		while(query != OrigDestFlightMap.end())
+		{
+			resFlights.push_back(*query);
+			i++;
+			query = OrigDestFlightMap.find(resFlights[i].second);
+		}
+	}
+
+	return resFlights;
+}
+	</code>
+</pre>
+</p>
