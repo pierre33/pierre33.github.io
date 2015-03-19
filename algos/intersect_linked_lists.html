@@ -28,7 +28,7 @@ Indeed, both lists share the same nodes from c1 to c3.
 Given the following prototype of the function:
 <pre class="prettyprint">
 	<code class="cc">
-	ListNode* getIntersectionNode(ListNode *headA, ListNode *headB)
+	ListNode* getIntersectionNode(ListNode *headA, ListNode *headB);
 	</code>
 </pre>
 the objective is to propose an algorithm with a time complexity of O(n) and a memory
@@ -38,7 +38,7 @@ If there is no intersection between both lists, the function must return NULL.
 <br />
 Finally we assume that there are no cycles in both lists.
 <br/>
-Before delving into the reasonning, I invite you to try to solve this solution and to come back after while ;)
+Before delving into the reasonning, I invite you to try to solve this solution and to come back after a while ;)
 </p>
 <h3 id="cmake" class="second-title">First reasonning</h3>
 <p>
@@ -65,8 +65,7 @@ and test if they are equal:
 	</code>
 </pre>
 This solution is O(1) memory complexity but the time complexity in the worst and average case is O(n*m) if n is the
-size of the first list and m the size of the second list. This proposed solution does not fulfill the requirements so we will
-need to optimize it.
+size of the first list and m the size of the second list. This proposed solution does not fulfill the requirements.
 </p>
 <h3 id="cmake" class="second-title">Second reasonning</h3>
 <p>
@@ -86,11 +85,11 @@ is the same then I can do the solution I just described before. The following fi
 <img  style="display:block; margin:0 auto; height:300px;"
 			src="img_algos/linkedLists2.png"/>
 If we start with a2 from L1 and b1 from L2 then we just have to scan the remaining nodes of both lists in parallel until
-both nodes are equal. For example in the figure above, we will first compare a2 and b1, a3 and b2 and c3 and c3. We stop and we return
-c3.
+both nodes are equal. For example in the figure above, we will first compare a2 and b1, a3 and b2 and c1 and c1. We stop and we return
+c1.
 <br/>
-How to determine the starting nodes ?<br/>
-I think by looking at the figure, you guess how to do it right ? Indeed, if we know the size of both lists and then compare
+Ok great but the question now is how to determine the starting nodes ?<br/>
+I think by looking at the figure you guess how to do it right ? Indeed, if we know the size of both lists and then compare
 these sizes we know where to start.
 <br/>
 <ul>
