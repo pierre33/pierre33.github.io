@@ -102,3 +102,36 @@ a:hover
 {
 	font-weight: bold;
 }
+
+.nav-link
+{
+	display: block;
+	height: 40px;
+}
+
+.li-menu
+{
+	height: 40px;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+	background-color: #f7f7f7;
+	line-height: 40px;
+	text-align: center;
+}
+
+.li-ref
+{
+	height: 40px;
+	width:100%;
+	letter-spacing: 1px;
+	margin-bottom: 20px;
+	line-height: 40px;
+	padding-left: 10px;
+	border-radius: 5px;
+	background-color: #f7f7f7;
+}
+
+.li-ref:hover, .li-menu:hover
+{
+	background-color:#d3e1c6;
+}
