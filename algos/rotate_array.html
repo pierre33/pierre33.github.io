@@ -32,7 +32,7 @@ the elements of the array. In addition, the solution has to be O(1) in space whi
 the idea to use a second temporary array is forbidden.... sorry :(
 </p>
 <p>
-Let consider this following table: [1,2,3,4,5,6] with n = 6 and k=4. Let be positive and start
+Let consider this following table: [1,2,3,4,5,6] with n = 6 and k=4. Let be optimistic and start
 moving the first element to the right by 4 steps and so on to see what happen:
 </p>
 <img  style="display:block; margin:0 auto; height:250px;"
@@ -50,18 +50,18 @@ Let move 3 to the right by 4 steps, again we arrive to the end of the array, hop
 a modulo and we get to the first index of the table and 3 replaces 1.
 </li> 
 <li>
-Again we keep doing it...wait...we already dealt with the index cero... problem ! Noooo it was too beautiful...
+Again we keep doing it... But wait ! ... We already dealt with the index cero... Problem ! Noooo it was too beautiful...
 </li>
 </ul>
 <p>
-Yes, we just discovered the little difficulty to overcome. Indeed we are in a cycle and the goal is to go out from
+Yes, we just discovered the mai problem to overcome. Indeed we are in a cycle and the goal is to get out from
 this cycle once we are over with it, i.e when we have moved all the elements of this cycle.
 </p>
 <p>
 The first problem to solve is to represent a cycle and detect when we are over with it. An idea ?
 <br/>
-Ok I give the solution. It is really simple actually since the cycle can be represented by an index
-and this index is 0 here since we start we the index 0. To detect if we are over with the cycle, we just have
+Ok I give the solution. It is really simple actually since the cycle can be represented by an index.
+This cycle index is 0 here since we start with the index 0. To detect if we are over with the cycle, we just have
 to check when our current index is equal to 0.
 <br/>
 Let see with our previous example:
@@ -82,7 +82,7 @@ Indeed it fulfills my goal ! And guess what we even finished to rotate the array
 since there are 6 elements. We have therefore to swap 6 times...
 <br/>
 Therefore, by doing a loop on the number of elements in the array and by carefully changing the cycle index when we are over with it,
-we fulfill the requirement of the target solution !
+we fulfill the requirements of the target solution !
 </p>
 <p>
 <pre class="prettyprint">
