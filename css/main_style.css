@@ -131,6 +131,12 @@ a:hover
 	background-color: #f7f7f7;
 }
 
+.a-ref
+{
+	display:block;
+	width:100%;
+}
+
 .li-ref:hover, .li-menu:hover
 {
 	background-color:#d3e1c6;
