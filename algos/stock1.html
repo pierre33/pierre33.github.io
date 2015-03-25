@@ -35,22 +35,23 @@ You find it already ! Ok let compare with mine.
 The time complexity has to be linear which means that we are contrained to explore all the
 prices once.
 <br/>
-Obviously, we first buy and then we sell. That means that we will first look for a low price
+Obviously, we will first buy and then we sell. That means that we will first look for a low price
 and then sell it when the price is higher (we expect a lot higher).
 <br/>
-We do not buy the share automatically on the day where the price is the minimum and we do not
-sell the share when the price is the higher. 
+We do not buy the share automatically on the day where the price is the lowest and we do not
+sell the share when the price is the highest. 
 <br/>
-Indeed if we consider the following prices [100 5 7 34 100 2], the lower price occurs the last day and the higher price the first
-day However, the best strategy consists of buying on day 2 and selling on day 5. 
+Indeed if we consider the following prices [150 5 7 34 100 2], the lowest price occurs the last day and the highest price the first
+day. However, the best strategy consists of buying on day 2 when the share is 5$ and selling on day 5 when it is 100$. Both prices
+are not extrema ! 
 </p>
 <p>
-The idea is to keep two variables: the current lower price of the visited days and the current maximum profit.
+The idea is to keep two variables: the current lowest price of the visited days and the current maximum profit.
 <br/>
-Indeed, consider we have a current minimum price curr_min and a current maximum profit curr_maxprofit. When
-analysing the price of the next day, we can have several possibilities. If the new price is lower than our current
-lower price then this new price becomes the the current lower price and we go directly to the next day. Else, we calculate
-the profit which is the difference between the new price and the current lower profit. If this new profit is higher than
+Indeed, let consider we have a current minimum price curr_min and a current maximum profit curr_maxprofit. When
+analysing the price of the next day, we can have several options. If the new price is lower than our current
+lowest price then this new price becomes the current lowest price and we go directly to the next day. Else, we calculate
+the profit which is the difference between the new price and the current lowest price. If this new profit is higher than
 our current maximum profit then this new profit becomes the current maximum profit and we go to the next day.
 <br/>
 Here are the steps with our previous example:
