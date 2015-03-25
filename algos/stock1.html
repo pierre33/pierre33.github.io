@@ -1,0 +1,103 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">Trader: best time to buy and sell</h2>
+<h3 id="cmake" class="second-title">Problem statement</h3>
+<p>
+Do you feel like trading today ?
+<br/>
+Imagine you are in a bank as a trader and your boss wants you to make the bank earn 
+a lot of money. You are given an array of stock prices. The i<sup>th</sup> element
+of the array corresponds to the price of a share of the stock on day i.
+<br/>
+You are allowed to do at most one transaction, i.e buy a stock and sell one share of the stock.
+<br/>
+The objective is to find a solution of time complexity O(n) and memory complexity O(1) that
+returns you the maximum profit.
+</p>
+<p>
+For example, let [100 5 7 34 100 2] be the prices in dollars of the stock for 6 days. If I buy a share
+of the stock on day 2 and I sell it on day 5, I realize the maximum profit of 95$. The function must
+return 95.
+</p>
+<p>
+As usual, try to to find the solution and come back in a while ;)
+</p>
+
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+
+<h3 id="cmake" class="second-title">Reasonning step</h3>
+
+<p>
+You find it already ! Ok let compare with mine.
+<br/>
+The time complexity has to be linear which means that we are contrained to explore all the
+prices once.
+<br/>
+Obviously, we first buy and then we sell. That means that we will first look for a low price
+and then sell it when the price is higher (we expect a lot higher).
+<br/>
+We do not buy the share automatically on the day where the price is the minimum and we do not
+sell the share when the price is the higher. 
+<br/>
+Indeed if we consider the following prices [100 5 7 34 100 2], the lower price occurs the last day and the higher price the first
+day However, the best strategy consists of buying on day 2 and selling on day 5. 
+</p>
+<p>
+The idea is to keep two variables: the current lower price of the visited days and the current maximum profit.
+<br/>
+Indeed, consider we have a current minimum price curr_min and a current maximum profit curr_maxprofit. When
+analysing the price of the next day, we can have several possibilities. If the new price is lower than our current
+lower price then this new price becomes the the current lower price and we go directly to the next day. Else, we calculate
+the profit which is the difference between the new price and the current lower profit. If this new profit is higher than
+our current maximum profit then this new profit becomes the current maximum profit and we go to the next day.
+<br/>
+Here are the steps with our previous example:
+<ul>
+<li>Day 1: price = 100$, curr_min = 100$, curr_maxprofit = 0$.</li>
+<li>Day 2: price = 5$, curr_min = 5$, curr_maxprofit = 0$.</li>
+<li>Day 3: price = 7$, curr_min = 5$, curr_maxprofit = 2$.</li>
+<li>Day 4: price = 34$, curr_min = 5$, curr_maxprofit = 29$.</li>
+<li>Day 1: price = 100$, curr_min = 5$, curr_maxprofit = 95$.</li>
+<li>Day 1: price = 2$, curr_min = 2$, curr_maxprofit = 95$.</li>
+</ul>
+The function returns 95.
+</p>
+<p>
+Let check if the solution fulfills the requirements. We visit all the prices just once.
+The solution has therefore a time complexity of O(n) where n is the number of prices in the array. 
+We just use two temporary variables in addition to the array of prices. The solution has therefore a constant memory
+complexity. 
+<br/>
+Ok we got it ! Our boss will be happy ;) 
+</p>
+
+<p>
+As usual, you can find here the source code of the solution:
+<pre class="prettyprint">
+	<code class="cc">
+	int maxProfit(vector&lt;int&gt; &prices) {
+
+		if (prices.size() &lt; 2)
+			return 0;
+
+		int min = prices[0];
+		int profit = 0;
+
+		for(int i = 1; i&lt;prices.size(); i++)
+		{
+			if(prices[i] &lt; min)
+				min = prices[i];
+			else
+			{
+				if(prices[i] - min &gt; profit)
+					profit = prices[i] - min;  
+			}
+		}
+		return profit;
+	}
+	</code>
+</pre>
+</p>
+</div>
