@@ -1,0 +1,146 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">Who is the intruder ?</h2>
+<h3 id="cmake" class="second-title">Problem statement</h3>
+<p>
+Let an array of integers where each element is repeated 3 times except one of them which
+is unique.
+<br/>
+The goal is to find this element. The solution must have a linear time complexity O(n)
+and a constant memory complexity O(1).
+</p>
+<p>
+For example, if we consider the following array: [4 7 8 4 5 7 8 4 7 8] then the solution
+must return 5.
+</p>
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+
+<h3 id="cmake" class="second-title">Reasonning step</h3>
+The solution is not so intuitive but very elegant.
+<br/>
+The idea is to turn the numbers of the array into their representation in base 3.
+The digits of the numbers are then added. The sum of the digits is then divided by 3 and
+we consider only the rest. The resting digits represents the unique number.
+<br/>
+For example, if we consider the previous array. The representation in base 3 of the numbers
+are:
+<ul>
+	<li> 4 -> 11 </li>
+	<li> 7 -> 21 </li>
+	<li> 8 -> 22 </li>
+	<li> 4 -> 11 </li>
+	<li> 5 -> 12 </li>
+	<li> 7 -> 21 </li>
+	<li> 8 -> 22 </li>
+	<li> 4 -> 11 </li>
+	<li> 7 -> 21 </li>
+	<li> 8 -> 22 </li>
+</ul> 
+The sum of all the first digits of the numbers is: 1 + 1 + 2 + 1 + 2 + 1 + 2 + 1 + 1 + 2 = 14.
+<br/>
+The rest of the division by 3 is 2.
+<br/>
+The sum of all the second digits is: 1 + 2 + 2 + 1 + 1 + 2 + 2 + 1 + 2 + 2 = 16.
+<br/>
+The rest of the division by 3 is 1.
+<br/>
+The number is then 12 in base 3 which is 5, i.e the unique number!
+<p>
+Indeed, since all the elements are repeated three times except one, when we do the sum of,
+let say, the first digit we have a number which can be written : 3n * 2 + 3m * 1 + (0 or 1 or 2)
+<br/>
+The last term is the first digit of the unique element ;) 
+</p>
+<pre class="prettyprint">
+	<code class="cc">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;cstdlib&gt;
+
+std::string convertToBase(int base, int num);
+std::vector&lt;std::string&gt; convertIntegerVectorToBaseVector(int base,
+		std::vector&lt;int&gt;& nums);
+int getUniqueElement(int base, std::vector&lt;int&gt;& nums);
+
+int main(int argc, char *argv[])
+{
+	std::vector&lt;int&gt; nums(10);
+	nums[0] = 14; nums[1] = 8; nums[2] = 26;
+	nums[3] = 14; nums[4] = 8; nums[5] = 26;
+	nums[6] = 4;
+	nums[7] = 14; nums[8] = 8; nums[9] = 26;
+
+	std::cout &lt;&lt; getUniqueElement(3, nums) &lt;&lt; std::endl;
+	
+    return 0;
+}
+
+std::vector&lt;std::string&gt; convertIntegerVectorToBaseVector(int base,
+		std::vector&lt;int&gt;& nums)
+{
+	std::vector&lt;std::string&gt; baseNums;
+	baseNums.reserve(nums.size());
+
+	for(auto& n: nums)
+		baseNums.push_back(convertToBase(base, n));
+	
+
+	return baseNums;
+}
+
+int getUniqueElement(int base, std::vector&lt;int&gt;& nums)
+{
+	std::vector&lt;std::string&gt; baseNums;
+	baseNums.reserve(nums.size());
+
+	for(auto& n: nums)
+		baseNums.push_back(convertToBase(base, n));
+
+	int maxSize = 0;
+	for(auto& s : baseNums)
+	{
+		if(maxSize &lt; s.size())
+			maxSize = s.size();
+	}
+
+	int unique[maxSize];
+	for(int i=0; i&lt;maxSize; i++)
+		unique[i] = 0;
+	
+	for(auto& s: baseNums)
+	{
+		for(int k=0; k&lt;s.size(); k++)
+			unique[k] += static_cast&lt;int&gt;(s[k]-'0');
+	}
+
+	int res = 0;
+	int power = 1;
+	for(int i=0; i&lt;maxSize; i++)
+	{
+		unique[i] %= base;
+		res += unique[i] * power;
+		power *= base;
+	}
+
+	return res;
+}
+
+std::string convertToBase(int base, int num)
+{
+	std::string result = "";
+
+	while(num)
+	{
+		result = result + std::to_string(num % base);
+		num /= base;
+	}
+
+	return result;
+} 
+	</code>
+</pre>
+</div>
+
