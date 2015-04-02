@@ -1,0 +1,88 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">House Robber</h2>
+<h3 id="cmake" class="second-title">Problem statement</h3>
+<p>
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+<br/>
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+<br/>
+    You can find and test your solution on Leetcode: <a href="https://leetcode.com/problems/house-robber/">house robber</a>.
+</p>
+<p >
+    For example, if we consider the following array: [10 13 23 17 6 11 18 16] representing the amount of money of each house
+    along the street then the robber can earn 60$ without being detected.
+    <br/>
+    Indeed, if the robber steals the house 0 (10$), the house 2 (23$), the house 5 (11$) and the house 7 (16$), it repesents
+    60$ in total and no robbed houses are stolen.
+</p>
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+    <h3 id="cmake" class="second-title">Reasonning step</h3 >
+    <p>
+        Let consider the previous example and see the reasonning to get the maximum amount of money of 60 $.
+        <br>
+        The idea is to avoid that two adjacents houses are stolen. To do that we will consider two types of houses:
+        the houses with an odd index and the house with an even index.
+        <br>
+        For each type of house, we assign a current profit. Let call odd_profit the profit for odd houses and 
+        even_profit the profit for even houses.
+        If at a given house, we notice that the profit of the other type of house is greater then we assign this higher
+        profit. Here are the steps with the previous example:
+        <ul>
+            <li>
+                <ul>
+                    <li>House 0: even_profit = 10 $, odd_profit = 0$ -> even_profit = 10$</li>
+                    <li>House 1: odd_profit = 13$, even_profit = 10$ -> odd_profit = 13$</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>House 2: even_profit = 10+23 = 33$, odd_profit = 13$ -> even_profit = 33$</li>
+                    <li>House 3: odd_profit = 13+17=30$, even_profit = 33$ -> odd_profit = 33$ (we change here)</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>House 4: even_profit = 33+6 = 39$, odd_profit = 33$ -> even_profit = 39$</li>
+                    <li>House 5: odd_profit = 33+11= 44$, even_profit = 39$ -> odd_profit = 44$</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>House 6: even_profit = 39+18=57$, odd_profit = 44$ -> even_profit = 57$</li>
+                    <li>House 7: odd_profit = 44+16=60$, even_profit = 57$ -> odd_profit = 60$</li>
+                </ul>
+            </li>
+        </ul>
+        The final odd_profit is greater than the final even_profit, we return the odd_profit. You can 
+        check that two adjacent houses are not stolen during the night.
+    </p>
+    <p>
+        As usual, here is the source code:
+        <pre class="prettyprint">
+	       <code class="cc">
+int rob(vector&lt;int&gt; &num) {
+    int even_profit = 0;
+    int odd_profit = 0;
+
+    for(int i = 0; i &lt; num.size(); i++)
+    {
+        if(i%2)
+        {
+            even_profit += num[i];
+            even_profit = (even_profit&gt;odd_profit?even_profit:odd_profit);
+        }
+        else
+        {
+            odd_profit += num[i];
+            odd_profit = (odd_profit&gt;even_profit?odd_profit:even_profit);
+        }
+    }
+    return (even_profit&gt;odd_profit?even_profit:odd_profit);
+}
+           	</code>
+        </pre>
+    </p>
+</div>
