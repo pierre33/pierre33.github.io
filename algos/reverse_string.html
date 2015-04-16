@@ -1,0 +1,83 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">Reverse Words in a String ?</h2>
+<h3 id="cmake" class="second-title">Problem statement</h3>
+<p>
+    Let a string representing a sentence. A sentence is composed of words separated by a space.
+    For example: "Welcome to Algo Planet" is a sentence. To make easier, we do not consider
+    cases where words are separated by several spaces.
+    <br/>
+    The goal is to find a solution <it>in-place</it> which reverses the sentence word by word.
+    With our previous example, the solution must return "Planet Algo to Welcome".
+</p>
+<p>
+    Take a paper and a pen anf find the solution !
+</p>
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+    
+<h3 id="cmake" class="second-title">Reasonning step</h3>
+    <p>
+    The solution is not so complicated but needs two steps. The idea is first
+    to reverse the whole sentence:
+    <br/>
+    "tenalP oglA ot emocleW"
+    <br/>
+    Once done, the next step is to reverse each word:
+    <br/>
+    "Planet Algo to Welcome"
+    </p>
+    <p>
+        The first step is relatively easy since we just have to swap the characters using
+        two local variables starting respectively at the beginning and the end of the string:
+        <pre class="prettyprint">
+	       <code class="cc">
+           void reverseSentence(string &amp;s)
+           {
+            int lower = 0;
+            int upper = s.size()-1;
+            while(lower &lt; upper)
+    	       {
+                auto tmp = s[upper];
+    		    s[upper] = s[lower];
+    		    s[lower] = tmp;
+    		    upper--;
+    		    lower++;
+               }
+           }
+            </code>
+        </pre>
+        The second step is to reverse the words in the reversed sentence. To do that, it is necessary
+        to determine when a word starts and when it ends. The end is detected by the next space. Once
+        the bounds determined we can do the same process we did to reverse the whole sentence:
+        <pre class="prettyprint">
+	       <code class="cc">
+           lower = 0;
+    	   upper = 0;
+    	   int cour_upper, cour_lower;
+    
+    	   while(upper &lt; s.size())
+    	    {
+    		    while(upper &lt; s.size() -1 && s[upper+1] != ' ')
+    			    upper++;
+    
+    		    cour_upper = upper;
+    		    cour_lower = lower;
+    
+    		    while(cour_lower &lt; cour_upper)
+    		    {
+    			    auto tmp = s[cour_upper];
+    			    s[cour_upper] = s[cour_lower];
+    			    s[cour_lower] = tmp;
+    			    --cour_upper;
+    			    ++cour_lower;
+    		    }
+    
+    		    lower = upper + 2;
+    		    upper++;
+    	    }
+            </code>
+        </pre>
+    </p>
+</div>
