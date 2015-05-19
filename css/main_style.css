@@ -117,8 +117,9 @@ a
 .page-content
 {
 	margin: 0 auto;
-	width: 90%;
+	width: 1170px;
 	margin-top: 10px;
+    position: relative;
 }
 
 .block-content
