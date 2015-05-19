@@ -135,6 +135,13 @@ a
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
+.profil-img
+{
+    float: right;
+    height: auto;
+    margin: 0px 0px 10px 20px; 
+}
+
 .a-block-content:hover
 {
     display: block;
@@ -143,6 +150,7 @@ a
 
 footer
 {
+    clear: both;
     color: white;
     background: black;
     width: 100%;
