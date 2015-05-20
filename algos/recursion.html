@@ -1,0 +1,231 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">A little reminder about recursion</h2>
+<h3 id="cmake" class="second-title">Calcul of the factorial of a number</h3>
+<p>
+This time, we change a bit the organization of the problem and
+we first recall the principle of the recursion. If you know very well
+this technique then go directly to the problem statement and try to solve
+it using the recursion.
+</p>
+<p>
+    The principle of the recursion is illustrated with the calculation
+    of the factorial of a number. Let see the following famous recursive
+    program to calculate the factorial of a number n:
+</p>
+<pre class="prettyprint">
+   <code class="cc">
+   int factorial(int n)
+   {
+        if(n=0)
+            return 1;
+        else
+            return n * factorial(n-1);
+   }
+    </code>
+</pre>
+<p>
+    Let suppose than n = 5 and let see how it works:
+    <ul>
+        <li>5 is greater than 0 then we go to the else body and we multiply 5 by the result of the
+            factorial of 4. Here we see that we call again the function, it is
+            the principle of recursion. Concretely, a stack of intructions is created and at this step
+            the instruction to multiply 5 by the factorial of 4 is pushed into the stack. We note
+            the stack:
+            <ul>
+                <li>factorial(5) = 5 * factorial(4)</li>
+            </ul>
+        </li>
+        <li>
+            4 is still greater than 0 then we push again the instruction into the stack
+             <ul>
+                <li>factorial(4) = 4 * factorial(3)</li>
+                 <li>factorial(5) = 5 * factorial(4)</li>
+            </ul>
+        </li>
+        <li>
+            3 is still greater than 0 then we push again the instruction into the stack
+             <ul>
+                <li>factorial(3) = 3 * factorial(2)</li>
+                 <li>factorial(4) = 4 * factorial(3)</li>
+                 <li>factorial(5) = 5 * factorial(4)</li>
+            </ul>
+        </li>
+        <li>
+            2 is still greater than 0 then we push again the instruction into the stack
+             <ul>
+                 <li>factorial(2) = 2 * factorial(1)</li>
+                 <li>factorial(3) = 3 * factorial(2)</li>
+                 <li>factorial(4) = 4 * factorial(3)</li>
+                 <li>factorial(5) = 5 * factorial(4)</li>
+            </ul>
+        </li>
+        <li>
+            1 is still greater than 0 then we push again the instruction into the stack
+             <ul>
+                 <li>factorial(1) = 1 * factorial(0)</li>
+                 <li>factorial(2) = 2 * factorial(1)</li>
+                 <li>factorial(3) = 3 * factorial(2)</li>
+                 <li>factorial(4) = 4 * factorial(3)</li>
+                 <li>factorial(5) = 5 * factorial(4)</li>
+            </ul>
+        </li>
+        <li>
+            1 is equal to 0 then we push 1 into the stack
+             <ul>
+                 <li>factorial(0) = 1</li>
+                 <li>factorial(1) = 1 * factorial(0)</li>
+                 <li>factorial(2) = 2 * factorial(1)</li>
+                 <li>factorial(3) = 3 * factorial(2)</li>
+                 <li>factorial(4) = 4 * factorial(3)</li>
+                 <li>factorial(5) = 5 * factorial(4)</li>
+            </ul>
+        </li>
+    </ul>
+</p>
+<p>
+    This step is called the top-down execution and represents the first step of the recursion. The second step
+    consists of the bottow-up execution and returns the final result by unstacking the intructions:
+    <ul>
+        <li>1</li>
+        <li>1*1</li>
+        <li>2*1*1</li>
+        <li>3*2*1*1</li>
+        <li>4*3*2*1*1</li>
+        <li>5*4*3*2*1*1</li>
+    </ul>
+    which returns 120.
+</p>
+<p>
+    Recursion in programming may be a very elegant way to solve some problems and turns out to be efficient
+    provided that the depth of the recursion is not important. In this situation, the number of intructions in the stack
+    can be large and it may be impossible to store it in memory. Recursion has to be used with caution.
+</p>
+
+<h2 class="main-title">Is this integer a palindrome ?</h2>
+<h3 id="cmake" class="second-title">Problem statement</h3>
+<p>
+Write a function using recursion to determine if an integer is a palindrome. For example 123 is not a palindrome
+since the reverse of 123 is 321 which is not equal to 123. However 13931 is a palindrome since the reverse of 13931 is still 13931.
+</p>
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+
+<h3 id="cmake" class="second-title">Reasonning step</h3>
+<p>
+    The key is to determine how we can transform this problem into a two-phase strategy: top-down and bottom-up execution.
+    If we take the number 13931, the logical idea is to compare the first digit with the last, the second with the one before
+    the last and so on...
+    <br/>
+    If for a comparison, there is no equality then we stop and return false else we keep going.
+    <br/>
+</p>
+<p>
+    How to compare the first digit with the last one ?
+    <br/>
+    To get the last digit, it is pretty simple since we just have to consider the rest of the division of the number by 10:
+    1 = 1393*10 + 1. 
+    <br/>
+    But, How to get the first digit ?
+    <br/>
+    The solution that comes into mind is to divise the integer successively by 10 until we reach the first digit. The problem
+    is that we have to record also the last digit to compare it with the first digit.
+</p>
+<p>
+    The recursive program will use two variables: a copy of the integer that will be successively divided by 10 in a the top down 
+    execution while keeping a reference to the initial integer constant. The top down execution stops when the copy value is just one digit.
+    <br/>
+    The bottom-up execution consists of successively dividing the reference value by 10. Then the rest of the division
+    by 10 of the reference value is compared with the rest of the division by 10 of the copy value stored in the stack
+    during the top-down execution.
+</p>
+<p>
+    Let see the stack of the solution for the number 13931. We create first the copy value noted cv = 13931 and the reference
+    value noted rv = 13931. We denote func(cv, rv) our recursive function. Please note that in C++ a reference can be seen
+    like a constant pointer.
+</p>
+<p>
+    The top-down execution:
+    <ul>
+        <li>cv is not one digit then we call func(cv/10, rv) and we store in the stack cv and rv:
+            <ul>
+                <li>cv = 13931 and rv = 13931</li>
+            </ul>
+        </li>
+        <li>cv = 1393 and is not one digit then we call func(cv/10, rv) and we store in the stack cv and rv:
+            <ul>
+                <li>cv = 1393 and rv = 13931</li>
+                <li>cv = 13931 and rv = 13931</li>
+            </ul>
+        </li>
+        <li>cv = 139 and is not one digit then we call func(cv/10, rv) and we store in the stack cv and rv:
+            <ul>
+                <li>cv = 139 and rv = 13931</li>
+                <li>cv = 1393 and rv = 13931</li>
+                <li>cv = 13931 and rv = 13931</li>
+            </ul>
+        </li>
+        <li>... so on ...</li>
+        <li>
+            <ul>
+                <li>cv = 13 and rv = 13931</li>
+                <li>cv = 139 and rv = 13931</li>
+                <li>cv = 1393 and rv = 13931</li>
+                <li>cv = 13931 and rv = 13931</li>
+            </ul>
+        </li>
+    </ul>
+At this step we have cv = 1 and rv = 13931. We compare the rest of the division by 10 of the rv with cv and check
+if they are equal. If not we stop the recursion and return false else we start the bottom-up execution.
+</p>
+<p>
+    The bottom-up execution consists of dividing value pointed by rv by 10 and compare the rest with the rest of the
+    division by 10 of the value cv. Both cv and the reference rv are unstacked:
+    <ul>
+        <li>rf = 13931/10, cv = 13 compare 1393 % 10 with 13 % 10</li>
+        <li>rf = 1393/10, cv = 139 compare 139 % 10 with 139 % 10</li>
+        <li>rf = 139/10, cv = 1393 compare 13 % 10 with 1393 % 10</li>
+        <li>rf = 13/10, cv = 13931 compare 1 % 10 with 13931 % 10</li>
+    </ul>
+    Yes !!! 13931 is a palindrome ;)
+</p>
+<p>
+    We have just to code it. Well actually it is maybe the most difficult part.
+    <br/>
+    As usual, below my proposed solution but try to code it by yourself ;)
+</p>
+    
+<pre class="prettyprint">
+   <code class="cc">
+    bool oneDigit(int num)
+    {
+    	return (num >=0 && num < 10);
+    }
+    
+    bool isPalRecursive(int copynum, int& refnum)
+    {
+    	// Stop condition of the recursive method
+    	// we compare the last digit of num which is refnum % 10
+    	// and the first digit of num given by copynum
+    	if(oneDigit(copynum))
+    		return (copynum == (refnum % 10));
+    
+    	// If copynum is not one digit we call recursively
+    	// the method isPalRecursive and we stop if it returns false.
+    	if(!isPalRecursive(copynum/10, refnum))
+    		return false;
+    
+    	refnum /= 10;
+    
+    	return (copynum % 10 == refnum % 10);
+    }
+
+    bool isPalindrome(int x) {
+    	if(x < 0)
+    		return false;
+    
+    	return isPalRecursive(x, x);
+    }
+    </code>
+</pre>
