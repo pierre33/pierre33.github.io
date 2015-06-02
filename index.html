@@ -2,7 +2,37 @@
 layout: default
 ---
                 <div class="block-content">
-                    <h3 class="title-block-content">LSRM Library:</h3>
+                    <h3 class="title-block-content">GRM Library: new stable version</h3>
+                    <h5>June 2015, 2nd</h5>
+                    <p>
+                        <p>
+                            A new version of the GRM library is available. The code has been test and major modifications 
+                            have been done thanks to the review of the company <a href="http://fr.atos.net/fr-fr/accueil.html">Atos</a>:
+                            <ul>
+                            <li>A memory bug has been corrected due to circular references with the <it>std::shared_ptr</it>.</li>
+                            <li>The Contour encoder seems to contain a bug, then it has been removed and will be added later.
+                                Instead each segment contains a list of its internal pixels. However, be careful since 
+                                this current solution requires more memory.
+                                </li>
+                            <li>
+                                At last but not least, the computation of the costs has been optimized making the algorithm
+                                really more efficient (10x speedup).
+                            </li>
+                            <li>
+                                Warning: the LSRM library available has not been corrected and contains some bugs. This
+                                will be corrected soon.
+                            </li>
+                        </p>
+                            <ul>
+                                <li class="li-algo"><a class="a-algo" href="http://tully.ups-tlse.fr/lassallep/grm/">GitHub</a></li>
+				                <li class="li-algo"><a class="a-algo" href="tuto.html#grm">Manual</a></li>
+                                <li class="li-algo"><a class="a-algo" href="http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=6947590&url=http%3A%2F%2Fieeexplore.ieee.org%2Fstamp%2Fstamp.jsp%3Ftp%3D%26arnumber%3D6947590">Paper related to it</a></li>
+                            </ul>
+                    </p>
+                </div>
+
+                <div class="block-content">
+                    <h3 class="title-block-content">LSRM Library: (Beta version may contain some bugs)</h3>
                     <h5>May 2015, 21th</h5>
                     <p>
                         <p>
