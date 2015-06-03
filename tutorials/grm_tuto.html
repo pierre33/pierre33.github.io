@@ -4,18 +4,17 @@ layout: tuto_layout
 
 <h2 class="main-title"> GRM Library Tutorial: User Guide</h2>
 <ol>
-	<li><a href="#rm">Region Merging: generic description</a></li>
+	<li><a href="#rm">Region-merging: generic description</a></li>
 	<ol type="i">
 		<li><a href="#heu">Heuristic used</a></li>
-		<li><a href="#params">Common parameters</a></li>
+		<li><a href="#params">Basic usage</a></li>
 	</ol>
-	<li><a href="#criter">Baatz & Schäpe criterion</a></li>
 </ol>
 
 
 <h3 id="rm" class="second-title"> Region Merging </h3>
 <p class="explanation">
-Region merging algorithms have proven to be an effective approach for image segmentation, especially for OBIA (Object-Based Image Analysis) in remote sensing. The basic approach of a region merging algorithm is to consider at the beginning every pixel of the image as an initial region. These regions are then merged iteratively to form the objects of the image. Region merging algorithms vary depending on the criteria used to decide whether two adjacent regions have to be merged and the heuristic to find for a region, its adjacent region to be merged.
+Region-merging algorithms have proven to be an effective approach for image segmentation, especially for OBIA (Object-Based Image Analysis) in remote sensing. The basic approach of a region merging algorithm is first described. At the beginning, every pixel of the image is an initial region. These regions are then merged iteratively to form the objects of the image. Region-merging algorithms vary depending on the criteria used to decide whether two adjacent regions have to be merged and also on the heuristic to take the decision to merge.
 <!---------------------------------------------------------------------------------->
 <h4 id="heu" class="third-title">Heuristic used</h4>
 At each iteration, we want to determine which regions have to be merged. 
@@ -43,44 +42,75 @@ The <i>LMBF</i> and <i>BF</i> heuristics have been selected in the GRM library. 
 global heterogeneity within the final regions of the image. This heuristic shows
 high quality segmentation results compared to the others.
 However this heuristic requires more iterations since the constraints to merge regions are stronger. 
-That is why it is possible for the user to have speedup by combining the <i>BF</i> heuristic with the 
+That is why, it is possible for the user to have speedup by combining the <i>BF</i> heuristic with the 
 <i>LMBF</i> heuristic or even by using only the <i>BF</i> heuristic. Be careful that in
-this case the quality of the results would be lower.
+this case the quality of the results may be lower.
 </p>
 <!---------------------------------------------------------------------------------->
-<h4 id="params" class="third-title">Common parameters</h4>
+<h4 id="params" class="third-title">Basic usage</h4>
 <p>
-This section describes the common parameters of a region merging algorithm
-that have to be specified by the user when using an algorithm from the GRM library.
-</p>
-<p>
-First, the user has to indicate the path to the image to segment. The following format
-are accepted with the otb library: (.jpg, .png, .tif). The method <i>SetInputFileName(filename)</i>
-of the generic class <i>RegionMergingAlgorithm</i> has to be called:
+The new GRM library is designed to be used like an OTB filter. First, the user has to
+declare the otb image reader filter to read the image, to instantiate it and update its output:
 <pre class="prettyprint">
 	<code class="cc">
-	segmenter.SetInputFileName(inputFileName);
+	typedef float PixelType;
+	typedef otb::VectorImage&lt;PixelType, 2&gt; InputImageType;
+	typedef otb::ImageFileReader&lt;InputImageType&gt; InputImageReaderType;
+
+	auto imgReader = InputImageReaderType::New();
+	imgReader->SetFileName(inFileName);
+	imgReader->Update();
 	</code>
 </pre>
-The proposed outputs of the GRM library are a label ouput image, a clustered output rgb image 
-and a contour output image.
-<br/>
-Both outputs require a path to write the corresponding image:
+The user-defined parameters for the region-merging are needed. The current region-merging
+criterion is based on the Baatz and Schäpe criterion described <a href="http://www.ecognition.cc/download/baatz_schaepe.pdf">here</a>.
+The user has to declare a structure <i>lsrm::BaatzParam</i> and initialize it with the
+spectral weight and the spatial weight.
 <pre class="prettyprint">
 	<code class="cc">
-	segmenter.SetClusteredImageFileName(clustered_image); // clustered image
-	segmenter.SetLabelImageFileName(label_image); // label image
+	lsrm::BaatzParam params;
+	params.m_SpectralWeight = atof(argv[4]);
+	params.m_ShapeWeight = atof(argv[5]);
 	</code>
 </pre>
-Specific parameters to the region merging algorithm are needed:
+The next step consists of declaring the segmentation filter and initialize it with
+the Baatz parameters, the threshold and the input image to be segmented:
 <pre class="prettyprint">
 	<code class="cc">
+	float sqrt_scale = atof(argv[6]);
+	const float scale = sqrt_scale * sqrt_scale;
+
+	typedef lsrm::BaatzSegmenter<InputImageType> SegmenterType;
+	SegmenterType segmenter;
 	segmenter.SetParam(params);
+	segmenter.SetThreshold(scale);
+	segmenter.SetInput(imgReader->GetOutput());
+	segmenter.Update();
 	</code>
 </pre>
-The declaration and initialization of the variable <i>params</i> is specific to a criterion
-and will be described later.  
-</p>
+
+Two types of output image can be retrieved from the segmentation filter: the label output
+image where each pixel is assigned to a region and the clustered output image where each
+region is represented by a unique color. In the following, the output images are then
+written on the disk thank to the otb image writer filter: 
+<pre class="prettyprint">
+	<code class="cc">
+	typedef otb::Image<LabelPixelType, 2> LabelImageType;
+	typedef otb::VectorImage<ClusterPixelType, 2> ClusterImageType;
+	typedef otb::ImageFileWriter<LabelImageType> LabelImageWriterType;
+	typedef otb::ImageFileWriter<ClusterImageType> ClusterImageWriterType;
+
+	auto labelWriter = LabelImageWriterType::New();
+	labelWriter->SetFileName(labelFileName);
+	labelWriter->SetInput(segmenter.GetLabeledClusteredOutput());
+	labelWriter->Update();
+
+	auto clusterWriter = ClusterImageWriterType::New();
+	clusterWriter->SetFileName(clusterFileName);
+	clusterWriter->SetInput(segmenter.GetClusteredImageOutput());
+	clusterWriter->Update();
+	</code>
+</pre>
 <p>
 As mentioned previously, two heuristics are proposed in the GRM library: <i>LMBF</i>
 and <i>BF</i>.
@@ -124,89 +154,8 @@ Or to use only the <i>BF</i> heuristic:
 	segmenter.SetDoBestFitting(true);
 	</code>
 </pre>
+The source code of this example can be found in the directory <i>Applications/RegionMergingSegmentation.cxx</i>.
 </p>
-<h4 id="bs" class="third-title"> Baatz & Schäpe criterion </h3>
-<p>
-This criterion is based on spectral and shape information. The spectral information
-is the standard deviation of the spectral intensities of the pixels within the regions
-and the shape information is based on the degree of smoothness and compactness of the
-region shapes. <br/>
-Two weight parameters allow to configure the relative importance of the spectral and
-shape information. Their values range from 0 to 1.
-<br/>
-Finally, in order to limit the under-segmentation, the user has to choose a value for
-the scale parameter which influences the size of the resulting regions. Its value has
-to be positive and depends on the nature of the objects to be extracted. A small value
-leads to small objects and a large value leads to larger objects. 
-</p>
-<p>
-This criterion was first introduced in this 
-<a href="http://scholar.google.fr/scholar?hl=fr&q=Multiresolution+Segmentation%3A+an+optimization+approach+for+high+quality+multi-scale+image+segmentation&btnG=&lr=">
-publication</a>.
-</p>
-<p>
-The source code for this example can be found in the file:<br/>
-<i>grm/src/Applications/RegionMergingSegmentation.cxx</i>
-</p>
-<p>
-Let's look at the minimal code required to use this algorithm. First the following header
-defining the Baatz algorithm class must be included:
-<pre class="prettyprint">
-	<code class="cc">
-	#include "lsrmBaatzSegmenter.h"
-	</code>
-</pre>
-Then, the headers to handle an otb vector image have to included:
-<pre class="prettyprint">
-	<code class="cc">
-	#include &lt;otbImageFileReader.h&gt;
-	#include &lt;otbVectorImage.h&gt;
-	</code>
-</pre>
-We declare the image type based on a particular pixel type and dimension. In this case the
-<i>float</i> type is used and the dimension of the image is obviously 2.
-<pre class="prettyprint">
-	<code class="cc">
-	typedef float PixelType;
-	typedef otb::VectorImage&lt;PixelType, 2&gt; ImageType;
-	</code>
-</pre> 
-Next, we declare the Baatz & Schäpe region merging algorithm based on the image type
-we have just declared.
-<pre class="prettyprint">
-	<code class="cc">
-	typedef lsrm::BaatzSegmenter&lt;ImageType&gt; SegmenterType;
-	</code>
-</pre> 
-We declare and construct the parameters specific to the Baatz & Schäpe criterion, i.e.,
-the spectral weight, the shape weight and the scale parameter.
-<pre class="prettyprint">
-	<code class="cc">
-	BaatzParams params = {0.5, 0.5, 40};
-	</code>
-</pre> 
-Then we construct our segmenter.
-<pre class="prettyprint">
-	<code class="cc">
-	SegmenterType segmenter;
-	</code>
-</pre>
-We pass the common parameters described previously.
-<pre class="prettyprint">
-	<code class="cc">
-	segmenter.SetParam(params);
-	segmenter.SetThreshold(scale);
-	segmenter.SetInputFileName(input_image);
-	segmenter.SetClusteredImageFileName(clustered_image);
-	segmenter.SetLabelImageFileName(label_image);
-	</code>
-</pre>
-And finally we run the segmentation process.
-<pre class="prettyprint">
-	<code class="cc">
-	segmenter.RunSegmentation();
-	</code>
-</pre>
 <p>
 Using the test image provided with the grm library in the directory <i>img/</i>, 
 we obtain the resulting clustered image with a scale value of 40, a spectral weight of 0.5 and a shape weight of 0.5.
