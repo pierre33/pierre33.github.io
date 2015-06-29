@@ -1,0 +1,61 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">Two numbers are ever quite alike!</h2>
+<h3 id="cmake" class="second-title">Summary Ranges</h3>
+<p>
+ Given a sorted integer array without duplicates, return the summary of its ranges.
+<br/>
+For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"]. 
+</p>
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="/*display:none;*/">
+<p>
+    As usual, below my proposed solution but try to code it by yourself ;)
+</p>
+    
+<pre class="prettyprint">
+   <code class="cc">
+
+	vector&lt;string&gt; summaryRanges(vector&lt;int&gt;& nums) {
+
+		vector&lt;string&gt; ranges;
+
+		// Check if nums is empty
+		if(nums.size() < 1)
+			return ranges;
+
+		int vmin, prev;
+		vmin = nums[0];
+		prev = vmin;
+
+		for(int i=1; i &lt; nums.size(); i++)
+		{
+			if(nums[i] &gt; prev + 1)
+			{
+				if(prev == vmin)
+					ranges.push_back(to_string(vmin));
+				else
+					ranges.push_back(to_string(vmin) + "-&gt;" + to_string(prev));
+
+				vmin = nums[i];
+				prev = vmin;
+			}
+			else
+				prev = nums[i];
+		}
+
+		if(prev == vmin)
+			ranges.push_back(to_string(vmin));
+		else
+			ranges.push_back(to_string(vmin) + "-&gt;" + to_string(prev));
+
+		return ranges;
+	}
+    </code>
+</pre>
+
+<div>
+<img src="img_algos/ranges_runtime.png" alt="Runtime of my solution is 0 ms"/>
+</div>
+
