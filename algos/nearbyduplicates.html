@@ -1,0 +1,56 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">Birds of a feather flock together</h2>
+<h3 id="cmake" class="second-title">Nearby duplicates</h3>
+<p>
+ Given an array of integers, find out whether there are two distinct indices i and j in the array such that the difference between nums[i] and nums[j] is at most t and the difference between i and j is at most k. 
+</p>
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+<p>
+    Here is my solution but I use a pair to store the value and its position. Try to find
+	a data structure lighter in memory. I have seen an elegant solution on the web when
+	comparing with mine.
+	<br/>
+	hint: values are stored in a contiguous way in the main memory ;) 
+</p>
+    
+<pre class="prettyprint">
+   <code class="cc">
+	bool containsNearbyAlmostDuplicate(vector&lt;int&gt;& nums, int k, int t) {
+
+	if(k==0) return false;
+	
+	vector&lt; pair&lt;int, int&gt; &gt; vp(nums.size());
+
+	for(int i = 0; i &lt; nums.size(); i++)
+	{
+		vp[i].first = nums[i];
+		vp[i].second = i;
+	}
+
+	std::sort(vp.begin(), vp.end(), [&](const pair&lt;int, int&gt;& a, const pair&lt;int, int&gt;& b)->bool{
+			return a.first &lt; b.first;
+		});
+
+	for(int i = 0; i &lt; nums.size(); i++)
+	{
+		for(int j = i+1; j &lt;nums.size(); j++)
+		{
+			if(vp[j].first &gt; vp[i].first + t)
+				break;
+
+			if(abs(vp[j].second - vp[i].second) &lt;= k)
+				return true;
+		}
+	}
+
+	return false;
+    }
+    </code>
+</pre>
+
+<div>
+<img src="img_algos/nearbyduplicates_runtime.png" alt="Runtime of my solution is 20 ms"/>
+</div>
