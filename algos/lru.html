@@ -1,0 +1,160 @@
+---
+layout: tuto_algos
+---
+<h2 class="main-title">The Last Shall Be the First</h2>
+<h3 id="cmake" class="second-title">LRU (Last Recently Used)</h3>
+
+<p>
+Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and set.
+<ul>
+<li>get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.</li>
+<li>set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.</li>
+</ul>
+</p>
+
+<button id="show" style="cursor:pointer;">Show solution</button>
+<div id="algo-solution" style="display:none;">
+<p>
+    Implementing a LRU cache is not so easy. Here is my solution with the
+    use of  priority queue and a hash table.
+	<br/>
+	hint: look at the LRU implemented for the source code of Linux :D
+</p>
+<pre class="prettyprint">
+   <code class="cc">
+struct Node
+{
+	Node(int k, int v) : key(k), value(v), prev(NULL), next(NULL)
+		{
+			
+		}
+	int key;
+	int value;
+	Node * prev;
+	Node * next;
+};
+
+struct DoubleLinkedList
+{
+	Node * head;
+	Node * last;
+
+	DoubleLinkedList(): head(NULL), last(NULL)
+		{
+			
+		}
+
+	~DoubleLinkedList()
+		{
+			for(Node * tmp = head; tmp != NULL; tmp = tmp-&gt;next)
+				delete tmp;
+		}
+
+	Node * InsertNode(int key, int value)
+		{
+			// Insert the node at the head of the list
+			Node * newnode = new Node(key, value);
+			newnode-&gt;next = head;
+			if(head)
+			{
+				head-&gt;prev = newnode;
+				head = newnode;
+			}
+			else
+			{
+				head = newnode;
+				last = newnode;
+			}
+
+			return newnode;
+		}
+
+	void RemoveLastNode()
+		{
+			assert(last != NULL);
+			Node * prevLastNode = last-&gt;prev;
+			delete last;
+			last = prevLastNode;
+			if(last)
+				last-&gt;next = NULL;
+			else
+				head = NULL;
+		}
+
+	int GetNode(Node * node)
+		{
+			if(node == head)
+			{
+				return node-&gt;value;
+			}
+			else
+			{
+				if(node == last)
+				{
+					node-&gt;next = head;
+					head-&gt;prev = node;
+					node-&gt;prev-&gt;next = NULL;
+					last = node-&gt;prev;
+					node-&gt;prev = NULL;
+					head = node;
+				}
+				else
+				{
+					node-&gt;prev-&gt;next = node-&gt;next;
+					node-&gt;next-&gt;prev = node-&gt;prev;
+					node-&gt;next = head;
+					head-&gt;prev = node;
+					node-&gt;prev = NULL;
+					head = node;
+				}
+				return head-&gt;value;
+			}
+		}
+};
+
+class LRUCache{
+public:
+	LRUCache(int capacity): m_CurrentSize(0), m_Capacity(capacity)
+		{		
+		}
+
+	int get(int key)
+		{
+			if(m_Container.find(key) == m_Container.end())
+				return -1;
+			else
+			{
+				Node * n = m_Container[key];
+				return priorityList.GetNode(n);
+			}
+		}
+
+	void set(int key, int value)
+		{
+			if(m_Container.find(key) == m_Container.end())
+			{
+				// When the cache reachs its capacity, it should invalidate
+				// the least recently used item before inserting a new
+				if(m_CurrentSize == m_Capacity)
+				{
+					// Remove the key from the map
+					m_Container.erase(priorityList.last-&gt;key);
+					priorityList.RemoveLastNode();
+					// Remove the corresponding key from the map
+					m_Container[key] = priorityList.InsertNode(key, value);
+				}
+				else
+				{
+					m_Container[key] = priorityList.InsertNode(key, value);
+					m_CurrentSize++;
+				}
+			}
+		}
+
+	int m_CurrentSize;
+	int m_Capacity;
+	DoubleLinkedList priorityList;
+	std::unordered_map&lt;int, Node *&gt; m_Container;
+};
+    </code>
+</pre>
