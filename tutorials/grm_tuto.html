@@ -2,165 +2,254 @@
 layout: tuto_layout
 ---
 
-<h2 class="main-title"> GRM Library Tutorial: User Guide</h2>
-<ol>
-	<li><a href="#rm">Region-merging: generic description</a></li>
-	<ol type="i">
-		<li><a href="#heu">Heuristic used</a></li>
-		<li><a href="#params">Basic usage</a></li>
-	</ol>
-</ol>
+<h2 class="main-title"> GenericRegionMerging application: Getting Started</h2>
+<h3 id="rm" class="second-title"> Install the Remote Module</h3>
+	<p>
+	In the future release of OTB (5.1), it will not be necessary to do this procedure since
+	you will just have to activate it when executing ccmake.
+	</p>
+	<p>
+	The first thing you need is to retrieve the GRM Remote Module available here:
+	</p>
+	<p>
+		<center>
+			<a href="http://tully.ups-tlse.fr/lassallep/grm/tree/master">http://tully.ups-tlse.fr/lassallep/grm/tree/master</a>
+		</center>
+	</p>
+	<p>
+	Once this module downloaded, name it GRM and copy it to the the remote module folder in the source directory of OTB:
+	/OTB_SOURCE_DIR/Modules/Remote/GRM/
+	</p>
+	<p>
+	Then run ccmake to create the Makefile for OTB. During the configuration, you should see GenericRegionMerging in the
+ 	application name list of OTB:
+	</p>
+	<p>
+	<img  style="display:block; margin:0 auto; height:500px; width:500pSx;" src="img_tuto/application_otb.jpg"/>
+	</p>
+	<p>
+	Then just generate and compile OTB with make.
+	To test the installation run the GenericRegionMerging application without arguments: 
+	</p>
+	<p>
+	<center>
+		/OTB_BIN/bin/./otbcli_GenericRegionMerging
+	</center>
+	</p>
+	If everything is ok you see the following message in your terminal:
+	</p>
+	<p>
+	<img  style="display:block; margin:0 auto; height:500px; width:500pSx;" src="img_tuto/success_message.jpg"/>
+	</p>
+	<p>
+		Great you have installed with success the GRM application. The next section will introduce how to
+		run a segmentation procedure.
+	</p>
+</p>
 
-
-<h3 id="rm" class="second-title"> Region Merging </h3>
-<p class="explanation">
-Region-merging algorithms have proven to be an effective approach for image segmentation, especially for OBIA (Object-Based Image Analysis) in remote sensing. The basic approach of a region merging algorithm is first described. At the beginning, every pixel of the image is an initial region. These regions are then merged iteratively to form the objects of the image. Region-merging algorithms vary depending on the criteria used to decide whether two adjacent regions have to be merged and also on the heuristic to take the decision to merge.
-<!---------------------------------------------------------------------------------->
-<h4 id="heu" class="third-title">Heuristic used</h4>
-At each iteration, we want to determine which regions have to be merged. 
-<br/>Different heuristics are proposed in the litterature:
+<h3 id="rm" class="second-title"> Run a region-merging segmentation</h3>
+	<h4>Mandatory parameters</h4>
+	<ul>
+		<li>"-in": this parameter corresponds to the path of the input image to be segmented.</li>
+		<li>"-out": this parameter corresponds to the path of the output label image.</li>
+		<li>"-threshold": this parameter controls is the stopping criterion of the region-merging procedure
+and controls the size of the output segments.</li>
+	</ul>
+	<p> 
+	Running by default the following command:
+	</p>
+	<p>
+	<center>
+	./otbcli_GenericRegionMerging -in img/test.tif -out img/labelOutput.tif -threshold 40
+	</center>
+	<p>
+	will launch a region-merging procedure using the Baatz and Schape criterion described 
+	<a href="http://www.ecognition.cc/download/baatz_schaepe.pdf">here</a>. The spectral
+weight and spatial weight are by default set to 0.5.
+	</p>
+<h4>Optional parameters</h4>
 <ul>
-	<li><i>Fitting (F)</i>: A region R1 is merged randomly with one of its adjacent region 
-		R2 for which the homogeneity criterion is fulfilled.
-	</li>
-	<li>
-		<i>Best Fitting (BF)</i>: For a region R1, we retain one of its adjacent region
-		R2 for which the homogeneity criterion is fulfilled the best.
-	</li>
-	<li>
-		<i>Local Mutual Best Fitting (LMBF)</i>: For a region R1, we determine its most similar
-		adjacent region R2. For R2, we determine its most similar adjacent region R3.
-		R1 and R2 are merged if R3 = R1.
-	</li>
-	<li>
-		<i>Global Mutual Best Fitting (GMBF)</i>: At each iteration, we merge the pair of adjacent
-		regions in the whole image which fulfills the homogeneity criterion the best.
-	</li>
+		<li>"-criterion": this parameter allows to select the homogeneity criterion to use:
+			<ul>
+				<li>"bs": Baatz and Schape criterion.</li>
+				<li>"ed": Euclidean distance criterion (only a threshold value is needed for this criterion).</li>
+				<li>"fls": Full Lambda schedule criterion (only a threshold value is needed for this criterion).</li>
+			</ul>
+		</li>
+		<li>"-niter": parameter to fix a maximum number of iterations when speed is not activated.</li>
+		<li>"-speed": this parameter allows to speed the segmentation process by allowing a segment to merge
+several times at each iteration.</li>
+		</li>"cw": specific parameter to set the relative importance of the spectral information for the Baatz and Schape criterion.</li>
+		<li>"sw": specific parameter to set the relative importance of the spatial information for the Baatz and Schape criterion.</li>
 </ul>
-The <i>LMBF</i> and <i>BF</i> heuristics have been selected in the GRM library. The
-<i>LMBF</i> heuristic allows a symmetric growth of the regions while minimizing the
-global heterogeneity within the final regions of the image. This heuristic shows
-high quality segmentation results compared to the others.
-However this heuristic requires more iterations since the constraints to merge regions are stronger. 
-That is why, it is possible for the user to have speedup by combining the <i>BF</i> heuristic with the 
-<i>LMBF</i> heuristic or even by using only the <i>BF</i> heuristic. Be careful that in
-this case the quality of the results may be lower.
-</p>
-<!---------------------------------------------------------------------------------->
-<h4 id="params" class="third-title">Basic usage</h4>
+<h4>Optional parameters</h4>
 <p>
-The new GRM library is designed to be used like an OTB filter. First, the user has to
-declare the otb image reader filter to read the image, to instantiate it and update its output:
-<pre class="prettyprint">
-	<code class="cc">
-	typedef float PixelType;
-	typedef otb::VectorImage&lt;PixelType, 2&gt; InputImageType;
-	typedef otb::ImageFileReader&lt;InputImageType&gt; InputImageReaderType;
-
-	auto imgReader = InputImageReaderType::New();
-	imgReader->SetFileName(inFileName);
-	imgReader->Update();
-	</code>
-</pre>
-The user-defined parameters for the region-merging are needed. The current region-merging
-criterion is based on the Baatz and Schäpe criterion described <a href="http://www.ecognition.cc/download/baatz_schaepe.pdf">here</a>.
-The user has to declare a structure <i>lsrm::BaatzParam</i> and initialize it with the
-spectral weight and the spatial weight.
-<pre class="prettyprint">
-	<code class="cc">
-	lsrm::BaatzParam params;
-	params.m_SpectralWeight = atof(argv[4]);
-	params.m_ShapeWeight = atof(argv[5]);
-	</code>
-</pre>
-The next step consists of declaring the segmentation filter and initialize it with
-the Baatz parameters, the threshold and the input image to be segmented:
-<pre class="prettyprint">
-	<code class="cc">
-	float sqrt_scale = atof(argv[6]);
-	const float scale = sqrt_scale * sqrt_scale;
-
-	typedef lsrm::BaatzSegmenter<InputImageType> SegmenterType;
-	SegmenterType segmenter;
-	segmenter.SetParam(params);
-	segmenter.SetThreshold(scale);
-	segmenter.SetInput(imgReader->GetOutput());
-	segmenter.Update();
-	</code>
-</pre>
-
-Two types of output image can be retrieved from the segmentation filter: the label output
-image where each pixel is assigned to a region and the clustered output image where each
-region is represented by a unique color. In the following, the output images are then
-written on the disk thank to the otb image writer filter: 
-<pre class="prettyprint">
-	<code class="cc">
-	typedef otb::Image<LabelPixelType, 2> LabelImageType;
-	typedef otb::VectorImage<ClusterPixelType, 2> ClusterImageType;
-	typedef otb::ImageFileWriter<LabelImageType> LabelImageWriterType;
-	typedef otb::ImageFileWriter<ClusterImageType> ClusterImageWriterType;
-
-	auto labelWriter = LabelImageWriterType::New();
-	labelWriter->SetFileName(labelFileName);
-	labelWriter->SetInput(segmenter.GetLabeledClusteredOutput());
-	labelWriter->Update();
-
-	auto clusterWriter = ClusterImageWriterType::New();
-	clusterWriter->SetFileName(clusterFileName);
-	clusterWriter->SetInput(segmenter.GetClusteredImageOutput());
-	clusterWriter->Update();
-	</code>
-</pre>
-<p>
-As mentioned previously, two heuristics are proposed in the GRM library: <i>LMBF</i>
-and <i>BF</i>.
-By default, the merging process is using a combination of both heuristics. The first
-75 iterations are done with the <i>LMBF</i> heuristic and then, if there are still regions to
-be merged, we switch with the <i>BF</i> heuristic and achieve the segmentation until there are no merges
-anymore.
-<br/>
-The user has the possibility to change this configuration by tuning the number of iterations
- when using the <i>LMBF</i> heuristic and by activating or desactivating the use of the
-<i>BF</i> heuristic.
-<pre class="prettyprint">
-	<code class="cc">
-	segmenter.SetNumberOfIterations(30);
-	segmenter.SetDoBestFitting(true);
-	</code>
-</pre>
-In this example, we choose to process the 30 first iterations using the <i>LMBF</i>
-and then we switch with the <i>BF</i> heuristic to achieve the segmentation.
-<br/>
-The following example shows that it is possible to impose a fix number of iterations
-using the <i>LMBF</i> heuristic without activating the <i>BF</i> heuristic.
-<pre class="prettyprint">
-	<code class="cc">
-	segmenter.SetNumberOfIterations(40);
-	segmenter.SetDoBestFitting(false);
-	</code>
-</pre>
-It is possible to use only the <i>LMBF</i> heuristic to process the segmentation by
-passing an "infinite" number of iterations:
-<pre class="prettyprint">
-	<code class="cc">
-	unsigned int max_iter = std::numeric_limits&lt;unsigned int&gt;max();
-	segmenter.SetNumberOfIterations(max_iter);
-	</code>
-</pre>
-Or to use only the <i>BF</i> heuristic:
-<pre class="prettyprint">
-	<code class="cc">
-	segmenter.SetNumberOfIterations(0);
-	segmenter.SetDoBestFitting(true);
-	</code>
-</pre>
-The source code of this example can be found in the directory <i>Applications/RegionMergingSegmentation.cxx</i>.
+The resulting image is a label image where each pixel belonging to the same segment is identified with a same
+unique label. You can see below an example of label image obtained with a region-merging segmentation
+using the Baatz and Schape criterion. A color mapping has been applied on the label image to visualize
+the segments.
 </p>
 <p>
-Using the test image provided with the grm library in the directory <i>img/</i>, 
-we obtain the resulting clustered image with a scale value of 40, a spectral weight of 0.5 and a shape weight of 0.5.
+<img  style="display:block; margin:0 auto; height:500px; width:500px;" src="img_tuto/color_map.jpg"/>
 </p>
-<img  style="display:block; margin:0 auto; height:500px; width:500pSx;"
-			src="img_tuto/refsegment.jpg"/>
-<img  style="display:block; margin:0 auto; height:500px; width:500pSx;"
-			src="img_tuto/refbaatzoutput.jpg"/>
+<!--<ol>-->
+<!--	<li><a href="#rm">Region-merging: generic description</a></li>-->
+<!--	<ol type="i">-->
+<!--		<li><a href="#heu">Heuristic used</a></li>-->
+<!--		<li><a href="#params">Basic usage</a></li>-->
+<!--	</ol>-->
+<!--</ol>-->
+
+
+<!--<h3 id="rm" class="second-title"> Region Merging </h3>-->
+<!--<p class="explanation">-->
+<!--Region-merging algorithms have proven to be an effective approach for image segmentation, especially for OBIA (Object-Based Image Analysis) in remote sensing. The basic approach of a region merging algorithm is first described. At the beginning, every pixel of the image is an initial region. These regions are then merged iteratively to form the objects of the image. Region-merging algorithms vary depending on the criteria used to decide whether two adjacent regions have to be merged and also on the heuristic to take the decision to merge.-->
+<!--<!---------------------------------------------------------------------------------->
+<!--<h4 id="heu" class="third-title">Heuristic used</h4>-->
+<!--At each iteration, we want to determine which regions have to be merged. -->
+<!--<br/>Different heuristics are proposed in the litterature:-->
+<!--<ul>-->
+<!--	<li><i>Fitting (F)</i>: A region R1 is merged randomly with one of its adjacent region -->
+<!--		R2 for which the homogeneity criterion is fulfilled.-->
+<!--	</li>-->
+<!--	<li>-->
+<!--		<i>Best Fitting (BF)</i>: For a region R1, we retain one of its adjacent region-->
+<!--		R2 for which the homogeneity criterion is fulfilled the best.-->
+<!--	</li>-->
+<!--	<li>-->
+<!--		<i>Local Mutual Best Fitting (LMBF)</i>: For a region R1, we determine its most similar-->
+<!--		adjacent region R2. For R2, we determine its most similar adjacent region R3.-->
+<!--		R1 and R2 are merged if R3 = R1.-->
+<!--	</li>-->
+<!--	<li>-->
+<!--		<i>Global Mutual Best Fitting (GMBF)</i>: At each iteration, we merge the pair of adjacent-->
+<!--		regions in the whole image which fulfills the homogeneity criterion the best.-->
+<!--	</li>-->
+<!--</ul>-->
+<!--The <i>LMBF</i> and <i>BF</i> heuristics have been selected in the GRM library. The-->
+<!--<i>LMBF</i> heuristic allows a symmetric growth of the regions while minimizing the-->
+<!--global heterogeneity within the final regions of the image. This heuristic shows-->
+<!--high quality segmentation results compared to the others.-->
+<!--However this heuristic requires more iterations since the constraints to merge regions are stronger. -->
+<!--That is why, it is possible for the user to have speedup by combining the <i>BF</i> heuristic with the -->
+<!--<i>LMBF</i> heuristic or even by using only the <i>BF</i> heuristic. Be careful that in-->
+<!--this case the quality of the results may be lower.-->
+<!--</p>-->
+<!--<!---------------------------------------------------------------------------------->
+<!--<h4 id="params" class="third-title">Basic usage</h4>-->
+<!--<p>-->
+<!--The new GRM library is designed to be used like an OTB filter. First, the user has to-->
+<!--declare the otb image reader filter to read the image, to instantiate it and update its output:-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	typedef float PixelType;-->
+<!--	typedef otb::VectorImage&lt;PixelType, 2&gt; InputImageType;-->
+<!--	typedef otb::ImageFileReader&lt;InputImageType&gt; InputImageReaderType;-->
+
+<!--	auto imgReader = InputImageReaderType::New();-->
+<!--	imgReader->SetFileName(inFileName);-->
+<!--	imgReader->Update();-->
+<!--	</code>-->
+<!--</pre>-->
+<!--The user-defined parameters for the region-merging are needed. The current region-merging-->
+<!--criterion is based on the Baatz and Schäpe criterion described <a href="http://www.ecognition.cc/download/baatz_schaepe.pdf">here</a>.-->
+<!--The user has to declare a structure <i>lsrm::BaatzParam</i> and initialize it with the-->
+<!--spectral weight and the spatial weight.-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	lsrm::BaatzParam params;-->
+<!--	params.m_SpectralWeight = atof(argv[4]);-->
+<!--	params.m_ShapeWeight = atof(argv[5]);-->
+<!--	</code>-->
+<!--</pre>-->
+<!--The next step consists of declaring the segmentation filter and initialize it with-->
+<!--the Baatz parameters, the threshold and the input image to be segmented:-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	float sqrt_scale = atof(argv[6]);-->
+<!--	const float scale = sqrt_scale * sqrt_scale;-->
+
+<!--	typedef lsrm::BaatzSegmenter<InputImageType> SegmenterType;-->
+<!--	SegmenterType segmenter;-->
+<!--	segmenter.SetParam(params);-->
+<!--	segmenter.SetThreshold(scale);-->
+<!--	segmenter.SetInput(imgReader->GetOutput());-->
+<!--	segmenter.Update();-->
+<!--	</code>-->
+<!--</pre>-->
+
+<!--Two types of output image can be retrieved from the segmentation filter: the label output-->
+<!--image where each pixel is assigned to a region and the clustered output image where each-->
+<!--region is represented by a unique color. In the following, the output images are then-->
+<!--written on the disk thank to the otb image writer filter: -->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	typedef otb::Image<LabelPixelType, 2> LabelImageType;-->
+<!--	typedef otb::VectorImage<ClusterPixelType, 2> ClusterImageType;-->
+<!--	typedef otb::ImageFileWriter<LabelImageType> LabelImageWriterType;-->
+<!--	typedef otb::ImageFileWriter<ClusterImageType> ClusterImageWriterType;-->
+
+<!--	auto labelWriter = LabelImageWriterType::New();-->
+<!--	labelWriter->SetFileName(labelFileName);-->
+<!--	labelWriter->SetInput(segmenter.GetLabeledClusteredOutput());-->
+<!--	labelWriter->Update();-->
+
+<!--	auto clusterWriter = ClusterImageWriterType::New();-->
+<!--	clusterWriter->SetFileName(clusterFileName);-->
+<!--	clusterWriter->SetInput(segmenter.GetClusteredImageOutput());-->
+<!--	clusterWriter->Update();-->
+<!--	</code>-->
+<!--</pre>-->
+<!--<p>-->
+<!--As mentioned previously, two heuristics are proposed in the GRM library: <i>LMBF</i>-->
+<!--and <i>BF</i>.-->
+<!--By default, the merging process is using a combination of both heuristics. The first-->
+<!--75 iterations are done with the <i>LMBF</i> heuristic and then, if there are still regions to-->
+<!--be merged, we switch with the <i>BF</i> heuristic and achieve the segmentation until there are no merges-->
+<!--anymore.-->
+<!--<br/>-->
+<!--The user has the possibility to change this configuration by tuning the number of iterations-->
+<!-- when using the <i>LMBF</i> heuristic and by activating or desactivating the use of the-->
+<!--<i>BF</i> heuristic.-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	segmenter.SetNumberOfIterations(30);-->
+<!--	segmenter.SetDoBestFitting(true);-->
+<!--	</code>-->
+<!--</pre>-->
+<!--In this example, we choose to process the 30 first iterations using the <i>LMBF</i>-->
+<!--and then we switch with the <i>BF</i> heuristic to achieve the segmentation.-->
+<!--<br/>-->
+<!--The following example shows that it is possible to impose a fix number of iterations-->
+<!--using the <i>LMBF</i> heuristic without activating the <i>BF</i> heuristic.-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	segmenter.SetNumberOfIterations(40);-->
+<!--	segmenter.SetDoBestFitting(false);-->
+<!--	</code>-->
+<!--</pre>-->
+<!--It is possible to use only the <i>LMBF</i> heuristic to process the segmentation by-->
+<!--passing an "infinite" number of iterations:-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	unsigned int max_iter = std::numeric_limits&lt;unsigned int&gt;max();-->
+<!--	segmenter.SetNumberOfIterations(max_iter);-->
+<!--	</code>-->
+<!--</pre>-->
+<!--Or to use only the <i>BF</i> heuristic:-->
+<!--<pre class="prettyprint">-->
+<!--	<code class="cc">-->
+<!--	segmenter.SetNumberOfIterations(0);-->
+<!--	segmenter.SetDoBestFitting(true);-->
+<!--	</code>-->
+<!--</pre>-->
+<!--The source code of this example can be found in the directory <i>Applications/RegionMergingSegmentation.cxx</i>.-->
+<!--</p>-->
+<!--<p>-->
+<!--Using the test image provided with the grm library in the directory <i>img/</i>, -->
+<!--we obtain the resulting clustered image with a scale value of 40, a spectral weight of 0.5 and a shape weight of 0.5.-->
+<!--</p>-->
+<!--<img  style="display:block; margin:0 auto; height:500px; width:500pSx;"-->
+<!--			src="img_tuto/refsegment.jpg"/>-->
+<!--<img  style="display:block; margin:0 auto; height:500px; width:500pSx;"-->
+<!--			src="img_tuto/refbaatzoutput.jpg"/>-->
